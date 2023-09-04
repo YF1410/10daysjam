@@ -98,23 +98,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Application\gameObject\bullet\Bullet.cpp" />
-    <ClCompile Include="Application\gameObject\element\ElementObject.cpp" />
-    <ClCompile Include="Application\gameObject\enemy\BaseEnemy.cpp" />
-    <ClCompile Include="Application\gameObject\enemy\BulletEnemy.cpp" />
-    <ClCompile Include="Application\gameObject\enemy\ElementEnemy.cpp" />
-    <ClCompile Include="Application\gameObject\enemy\InvisibleEnemy.cpp" />
-    <ClCompile Include="Application\gameObject\enemy\TackleEnemy.cpp" />
-    <ClCompile Include="Application\gameObject\player\Player.cpp" />
     <ClCompile Include="Application\main.cpp" />
     <ClCompile Include="Application\NamiGame.cpp" />
-    <ClCompile Include="Application\scene\GameClearScene.cpp" />
-    <ClCompile Include="Application\scene\GameOverScene.cpp" />
     <ClCompile Include="Application\scene\GameScene.cpp" />
-    <ClCompile Include="Application\scene\StageManager.cpp" />
     <ClCompile Include="Application\scene\SceneManager.cpp" />
-    <ClCompile Include="Application\scene\TitleScene.cpp" />
-    <ClCompile Include="Application\scene\TutorialScene.cpp" />
     <ClCompile Include="Engine\2d\AllLoadSprite.cpp" />
     <ClCompile Include="Engine\2d\DebugText.cpp" />
     <ClCompile Include="Engine\2d\PostEffect.cpp" />
@@ -146,23 +133,10 @@
     <ClCompile Include="Engine\utility\FixFPS.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application\gameObject\bullet\Bullet.h" />
-    <ClInclude Include="Application\gameObject\element\ElementObject.h" />
-    <ClInclude Include="Application\gameObject\enemy\BaseEnemy.h" />
-    <ClInclude Include="Application\gameObject\enemy\BulletEnemy.h" />
-    <ClInclude Include="Application\gameObject\enemy\ElementEnemy.h" />
-    <ClInclude Include="Application\gameObject\enemy\InvisibleEnemy.h" />
-    <ClInclude Include="Application\gameObject\enemy\TackleEnemy.h" />
-    <ClInclude Include="Application\gameObject\player\Player.h" />
     <ClInclude Include="Application\NamiGame.h" />
-    <ClInclude Include="Application\scene\GameClearScene.h" />
-    <ClInclude Include="Application\scene\GameOverScene.h" />
     <ClInclude Include="Application\scene\GameScene.h" />
-    <ClInclude Include="Application\scene\StageManager.h" />
     <ClInclude Include="Application\scene\SceneInterface.h" />
     <ClInclude Include="Application\scene\SceneManager.h" />
-    <ClInclude Include="Application\scene\TitleScene.h" />
-    <ClInclude Include="Application\scene\TutorialScene.h" />
     <ClInclude Include="Engine\2d\AllLoadSprite.h" />
     <ClInclude Include="Engine\2d\DebugText.h" />
     <ClInclude Include="Engine\2d\PostEffect.h" />

@@ -12,15 +12,7 @@ public:
 
 	void Draw();
 
-	void ToTitleScene();
-
-	void ToTutorialScene();
-
 	void ToGameScene(StageManager::StageType stageType);
-
-	void ToGameClearScene();
-
-	void ToGameOverScene();
 
 private:
 	void changeScene(SceneInterface* scene);

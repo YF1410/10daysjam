@@ -1,8 +1,5 @@
 #include "NamiGame.h"
 #include "GameScene.h"
-#include "GameOverScene.h"
-#include "TitleScene.h"
-#include "TutorialScene.h"
 #include "AllLoadSprite.h"
 
 void NamiGame::Initialize() {
@@ -29,7 +26,7 @@ void NamiGame::Initialize() {
 #pragma endregion 汎用機能初期化
 
 	// ゲームシーンの初期化
-	scene_->Initialize(new GameOverScene);
+	scene_->Initialize(new GameScene);
 
 	//ポストエフェクト用のテクスチャの読み込み
 	//Sprite::LoadTexture(100, L"Resources/white1x1.png");

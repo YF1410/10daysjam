@@ -14,20 +14,9 @@
 #include "CollisionPrimitive.h"
 
 #include "SceneManager.h"
-
-#include "BaseEnemy.h"
-#include "ElementObject.h"
-#include "Player.h"
 #include "SceneInterface.h"
 #include "BaseCollider.h"
-#include "ElementEnemy.h"
-#include "BulletEnemy.h"
-#include "TackleEnemy.h"
-#include "InvisibleEnemy.h"
-
 #include <vector>
-
-class Player;
 
 /// <summary>
 /// ゲームシーン
@@ -74,14 +63,6 @@ public: // メンバ関数
 	/// </summary>
 	void Draw() override;
 
-	void stageEnemy(StageManager::StageType nowStageNum);
-
-	void firstStage();
-	void secondStage();
-	void thirdStage();
-	void fourthStage();
-	void fifthStage();
-
 protected: // メンバ変数
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
@@ -102,21 +83,6 @@ protected: // メンバ変数
 	std::unique_ptr <Camera> cameraObject;
 	ParticleManager* particleMan;
 
-	std::unique_ptr<Sprite> HP[4];
-
-	std::unique_ptr<FbxModel> playerModel;
-	std::unique_ptr<Player> player;
-
-	std::list<std::unique_ptr<BaseEnemy>> enemy;
-
-	std::unique_ptr<FbxModel> elementModel;
-	std::list<std::unique_ptr<ElementObject>> element;
-
-	std::unique_ptr<Model> groundModel;
-	std::unique_ptr<Object3d> groundObj;
-
-	std::unique_ptr<Model> skydomeModel;
-	std::unique_ptr<Object3d> skydomeObj;
 	std::unique_ptr<LightGroup> lightGroup;
 
 	float cameraEye[3] = { 0.0f,25.0f,-50.0f };
