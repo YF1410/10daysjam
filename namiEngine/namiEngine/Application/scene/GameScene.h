@@ -80,6 +80,20 @@ protected: // メンバ変数
 	std::unique_ptr<Sprite> scoreSprite;//SCOREロゴ
 	std::unique_ptr<Sprite> nextSprite;//NEXTロゴ
 
+	//制限時間関連
+	std::unique_ptr<Sprite> colonTime;//コロン(:)
+	std::unique_ptr<Sprite> hunSecTime[10];//[1]20
+	std::unique_ptr<Sprite> tenSecTime[10];//1[2]0
+	std::unique_ptr<Sprite> oneSecTime[10];//12[0]
+
+	//リザルト画面用
+	std::unique_ptr<Sprite> retrySprite;//RETRYロゴ
+	std::unique_ptr<Sprite> titleSprite;//TITLEロゴ
+	std::unique_ptr<Sprite> resultSprite;//RESULTロゴ
+	std::unique_ptr<Sprite> rankSprite;//RANKロゴ
+	std::unique_ptr<Sprite> aSprite;//aロゴ
+	std::unique_ptr<Sprite> bSprite;//bロゴ
+	std::unique_ptr<Sprite> cSprite;//cロゴ
 
 	XMFLOAT4 fadeColor = { 1.0f,1.0f,1.0f,1.0f };
 	bool isFadeOut = false;
@@ -105,4 +119,11 @@ protected: // メンバ変数
 	XMFLOAT3 circleShadowDir = {0,-1,0};
 	XMFLOAT3 circleShadowAtten = { 0.5f,0.6f,0.0f };
 	XMFLOAT2 circleShadowFactorAngle = { 0.0f,0.5f };
+
+	//制限時間関連
+	float maxGameTime = 7200.0f;//制限時間最大
+	float gameTime = 7200.0f;//制限時間
+	int calculatedTime = 0.0f;//表示用に計算された制限時間
+	int drawTime[3];//スコア表示用(0:百 1:十 2:一)
+
 };
