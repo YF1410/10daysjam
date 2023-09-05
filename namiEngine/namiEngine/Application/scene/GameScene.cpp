@@ -40,6 +40,11 @@ void GameScene::Initialize() {
 
 	//スプライト生成
 	fadeSprite = Sprite::Create(2, { 0.0f,0.0f }, fadeColor);
+
+	for (int i = 0; i < 3; i++)
+	{
+		blockSprite[i] = Sprite::Create(i + 1, { i * 64.0f,0.0f });
+	}
 	// 背景スプライト生成
 
 	// パーティクルマネージャ生成
@@ -132,8 +137,12 @@ void GameScene::Draw() {
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
 
-	fadeSprite->Draw();
+	//fadeSprite->Draw();
 
+	for (int i = 0; i < 3; i++)
+	{
+		blockSprite[i]->Draw();
+	}
 	// デバッグテキストの描画
 	debugText->DrawAll();
 
