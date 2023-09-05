@@ -41,6 +41,7 @@ void GameScene::Initialize() {
 	//スプライト生成
 	//fadeSprite = Sprite::Create(2, { 0.0f,0.0f }, fadeColor);
 
+	//ブロックの模様
 	for (int i = 0; i < 3; i++)
 	{
 		blockSprite[i] = Sprite::Create(i + 1, { i * 64.0f,0.0f });
@@ -54,6 +55,16 @@ void GameScene::Initialize() {
 			tile[i][j]->SetSize({ 128.0f,128.0f });
 		}
 	}
+
+	//数字0～9
+	for (int i = 0; i < 10; i++)
+	{
+		number[i] = Sprite::Create(i + 10, { i * 64.0f, 650.0f });
+	}
+
+	//コロン(:)
+	colon = Sprite::Create(20, { 0.0f, 740.0f });
+
 
 	// 背景スプライト生成
 
@@ -143,6 +154,7 @@ void GameScene::Draw() {
 
 	//fadeSprite->Draw();
 
+	//ブロックの模様
 	for (int i = 0; i < 3; i++)
 	{
 		blockSprite[i]->Draw();
@@ -153,6 +165,15 @@ void GameScene::Draw() {
 			tile[i][j]->Draw();
 		}
 	}
+
+	//数字0～9
+	for (int i = 0; i < 10; i++)
+	{
+		number[i]->Draw();
+	}
+
+	//コロン
+	colon->Draw();
 
 	cursor->Draw();
 	// デバッグテキストの描画
