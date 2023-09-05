@@ -80,6 +80,21 @@ void GameScene::Initialize() {
 	//NEXTロゴ
 	nextSprite = Sprite::Create(7, { 1200.0f, 250.0f });
 
+	//制限時間関連
+	colonTime = Sprite::Create(20, { 400.0f, 50.0f });//コロン(:)
+	for (int i = 0; i < 10; i++)
+	{
+		hunSecTime[i] = Sprite::Create(10 + i, { 435.0f, 50.0f });//[1]20
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		tenSecTime[i] = Sprite::Create(10 + i, { 470.0f, 50.0f });//1[2]0
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		oneSecTime[i] = Sprite::Create(10 + i, { 505.0f, 50.0f });//12[0]
+	}
+
 	// 背景スプライト生成
 
 	// パーティクルマネージャ生成
@@ -120,6 +135,12 @@ void GameScene::Finalize()
 
 void GameScene::Update() {
 	cursor->SetPosition(input->GetMousePosition());
+
+	gameTime--;//制限時間を減らす
+	calculatedTime = gameTime / 60;//制限時間表示用に計算
+	drawTime[0] = (calculatedTime / 100) % 10;//[1]00
+	drawTime[1] = (calculatedTime / 10) % 10;//0[1]0
+	drawTime[2] = calculatedTime % 10;//00[1]
 }
 
 
@@ -200,6 +221,12 @@ void GameScene::Draw() {
 
 	//NEXTロゴ
 	nextSprite->Draw();
+
+	//制限時間関連
+	colonTime->Draw();//コロン(:)
+	hunSecTime[drawTime[0]]->Draw();//[1]20
+	tenSecTime[drawTime[1]]->Draw();//1[2]0
+	oneSecTime[drawTime[2]]->Draw();//12[0]
 
 	cursor->Draw();
 	// デバッグテキストの描画
