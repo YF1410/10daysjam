@@ -4,8 +4,8 @@
 class WinApp {
 public: // 静的メンバ変数
 	// ウィンドウサイズ
-	static const int window_width = 1280; // 横幅
-	static const int window_height = 720; // 縦幅
+	static const int window_width = 1600; // 横幅
+	static const int window_height = 900; // 縦幅
 	static const wchar_t windowClassName[];
 
 public: // 静的メンバ関数

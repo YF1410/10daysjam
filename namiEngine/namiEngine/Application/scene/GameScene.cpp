@@ -47,6 +47,14 @@ void GameScene::Initialize() {
 	}
 
 	cursor = Sprite::Create(4, { 0.0f,0.0f });
+	
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			tile[i][j] = Sprite::Create(5, { 128.0f + i * 128.0f, 128.0f + j * 128.0f });
+			tile[i][j]->SetSize({ 128.0f,128.0f });
+		}
+	}
+
 	// 背景スプライト生成
 
 	// パーティクルマネージャ生成
@@ -138,6 +146,12 @@ void GameScene::Draw() {
 	for (int i = 0; i < 3; i++)
 	{
 		blockSprite[i]->Draw();
+	}
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			tile[i][j]->Draw();
+		}
 	}
 
 	cursor->Draw();

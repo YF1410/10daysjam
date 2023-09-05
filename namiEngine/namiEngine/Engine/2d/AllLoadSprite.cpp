@@ -22,6 +22,11 @@ void AllLoadSprite::AllLoadTexture()
 		assert(0);
 		return;
 	}
+	if (!Sprite::LoadTexture(5, L"Resources/sprite/tile.png"))
+	{
+		assert(0);
+		return;
+	}
 
 	/*if (!Sprite::LoadTexture(46, L"Resources/gameover.png")) {
 		assert(0);
