@@ -27,7 +27,26 @@ void AllLoadSprite::AllLoadTexture()
 		assert(0);
 		return;
 	}
-
+	if (!Sprite::LoadTexture(6, L"Resources/sprite/score.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(7, L"Resources/sprite/next.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(8, L"Resources/sprite/retry.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(9, L"Resources/sprite/title.png"))
+	{
+		assert(0);
+		return;
+	}
 	if (!Sprite::LoadTexture(10, L"Resources/sprite/0.png"))
 	{
 		assert(0);
@@ -79,6 +98,16 @@ void AllLoadSprite::AllLoadTexture()
 		return;
 	}
 	if (!Sprite::LoadTexture(20, L"Resources/sprite/colon.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(21, L"Resources/sprite/result.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(22, L"Resources/sprite/rank.png"))
 	{
 		assert(0);
 		return;

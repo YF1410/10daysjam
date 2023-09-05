@@ -76,6 +76,9 @@ protected: // メンバ変数
 	std::unique_ptr<Sprite> tile[4][4];
 	std::unique_ptr<Sprite> number[10];//数字0～9
 	std::unique_ptr<Sprite> colon;//コロン(:)
+	std::unique_ptr<Sprite> scoreSprite;//SCOREロゴ
+	std::unique_ptr<Sprite> nextSprite;//NEXTロゴ
+
 
 	XMFLOAT4 fadeColor = { 1.0f,1.0f,1.0f,1.0f };
 	bool isFadeOut = false;

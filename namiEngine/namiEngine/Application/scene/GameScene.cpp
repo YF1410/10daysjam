@@ -59,12 +59,17 @@ void GameScene::Initialize() {
 	//数字0～9
 	for (int i = 0; i < 10; i++)
 	{
-		number[i] = Sprite::Create(i + 10, { i * 64.0f, 650.0f });
+		number[i] = Sprite::Create(i + 10, { (i * 35.0f) + 1200.0f, 100.0f });
 	}
 
 	//コロン(:)
-	colon = Sprite::Create(20, { 0.0f, 740.0f });
+	colon = Sprite::Create(20, { 1165.0f, 100.0f });
 
+	//SCOREロゴ
+	scoreSprite = Sprite::Create(6, { 1000.0f, 100.0f });
+
+	//NEXTロゴ
+	nextSprite = Sprite::Create(7, { 1200.0f, 250.0f });
 
 	// 背景スプライト生成
 
@@ -172,8 +177,14 @@ void GameScene::Draw() {
 		number[i]->Draw();
 	}
 
-	//コロン
+	//コロン(:)
 	colon->Draw();
+
+	//SCOREロゴ
+	scoreSprite->Draw();
+
+	//NEXTロゴ
+	nextSprite->Draw();
 
 	cursor->Draw();
 	// デバッグテキストの描画
