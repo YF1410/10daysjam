@@ -71,9 +71,6 @@ void GameScene::Initialize() {
 		number[i] = Sprite::Create(i + 10, { (i * 35.0f) + 1200.0f, 100.0f });
 	}
 
-	//コロン(:)
-	colon = Sprite::Create(20, { 1165.0f, 100.0f });
-
 	//SCOREロゴ
 	scoreSprite = Sprite::Create(6, { 1000.0f, 100.0f });
 
@@ -81,18 +78,47 @@ void GameScene::Initialize() {
 	nextSprite = Sprite::Create(7, { 1200.0f, 250.0f });
 
 	//制限時間関連
-	colonTime = Sprite::Create(20, { 400.0f, 50.0f });//コロン(:)
+	timeSprite = Sprite::Create(26, { 330.0f, 80.0f });//TIMEロゴ
+	colonTime = Sprite::Create(20, { 460.0f, 80.0f });//コロン(:)
 	for (int i = 0; i < 10; i++)
 	{
-		hunSecTime[i] = Sprite::Create(10 + i, { 435.0f, 50.0f });//[1]20
+		hunSecTime[i] = Sprite::Create(10 + i, { 495.0f, 80.0f });//[1]20
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		tenSecTime[i] = Sprite::Create(10 + i, { 470.0f, 50.0f });//1[2]0
+		tenSecTime[i] = Sprite::Create(10 + i, { 530.0f, 80.0f });//1[2]0
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		oneSecTime[i] = Sprite::Create(10 + i, { 505.0f, 50.0f });//12[0]
+		oneSecTime[i] = Sprite::Create(10 + i, { 565.0f, 80.0f });//12[0]
+	}
+
+	//スコア関連
+	scoreSprite = Sprite::Create(6, { 1070.0f, 100.0f });//SCOREロゴ
+	colonScore = Sprite::Create(20, { 1235.0f, 100.0f });//コロン(:)
+	for (int i = 0; i < 10; i++)
+	{
+		hunThouScore[i] = Sprite::Create(10 + i, { 1270.0f, 100.0f });//[0]00000
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		tenThouScore[i] = Sprite::Create(10 + i, { 1305.0f, 100.0f });//0[0]0000
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		thouScore[i] = Sprite::Create(10 + i, { 1340.0f, 100.0f });//00[0]000
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		hunScore[i] = Sprite::Create(10 + i, { 1375.0f, 100.0f });//000[0]00
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		tenScore[i] = Sprite::Create(10 + i, { 1410.0f, 100.0f });//0000[0]0
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		oneScore[i] = Sprite::Create(10 + i, { 1445.0f, 100.0f });//00000[0]
 	}
 
 	// 背景スプライト生成
@@ -136,11 +162,20 @@ void GameScene::Finalize()
 void GameScene::Update() {
 	cursor->SetPosition(input->GetMousePosition());
 
+	//制限時間関連
 	gameTime--;//制限時間を減らす
 	calculatedTime = gameTime / 60;//制限時間表示用に計算
 	drawTime[0] = (calculatedTime / 100) % 10;//[1]00
 	drawTime[1] = (calculatedTime / 10) % 10;//0[1]0
 	drawTime[2] = calculatedTime % 10;//00[1]
+
+	//スコア関連
+	drawScore[0] = (score / 100000) % 10;//[0]00000
+	drawScore[1] = (score / 10000) % 10;//0[0]0000
+	drawScore[2] = (score / 1000) % 10;//00[0]000
+	drawScore[3] = (score / 100) % 10;//000[0]00
+	drawScore[4] = (score / 10) % 10;//0000[0]0
+	drawScore[5] = score % 10;//00000[0]
 }
 
 
@@ -210,23 +245,28 @@ void GameScene::Draw() {
 	//数字0～9
 	for (int i = 0; i < 10; i++)
 	{
-		number[i]->Draw();
+		//number[i]->Draw();
 	}
-
-	//コロン(:)
-	colon->Draw();
-
-	//SCOREロゴ
-	scoreSprite->Draw();
 
 	//NEXTロゴ
 	nextSprite->Draw();
 
 	//制限時間関連
+	timeSprite->Draw();//TIMEロゴ
 	colonTime->Draw();//コロン(:)
 	hunSecTime[drawTime[0]]->Draw();//[1]20
 	tenSecTime[drawTime[1]]->Draw();//1[2]0
 	oneSecTime[drawTime[2]]->Draw();//12[0]
+
+	//スコア関連
+	scoreSprite->Draw();//SCOREロゴ
+	colonScore->Draw();//コロン(:)
+	hunThouScore[drawScore[0]]->Draw();//[0]00000
+	tenThouScore[drawScore[1]]->Draw();//0[0]0000
+	thouScore[drawScore[2]]->Draw();//00[0]000
+	hunScore[drawScore[3]]->Draw();//000[0]00
+	tenScore[drawScore[4]]->Draw();//0000[0]0
+	oneScore[drawScore[5]]->Draw();//00000[0]
 
 	cursor->Draw();
 	// デバッグテキストの描画
