@@ -45,8 +45,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)Application\;$(ProjectDir)Application\gameObject\player\;$(ProjectDir)Application\gameObject\element\;$(ProjectDir)Application\gameObject\enemy\;$(ProjectDir)Application\gameObject\bullet\;$(ProjectDir)Application\scene\;$(ProjectDir)Engine\2d;$(ProjectDir)Engine\3d\collider\mesh\;$(ProjectDir)Engine\3d\collider\raycast\;$(ProjectDir)Engine\3d\collider\sphere\;$(ProjectDir)Engine\3d\collider\;$(ProjectDir)Engine\3d\fbx\;$(ProjectDir)Engine\3d\light\;$(ProjectDir)Engine\3d\obj\;$(ProjectDir)Engine\3d\particle\;$(ProjectDir)Engine\audio\;$(ProjectDir)Engine\base\;$(ProjectDir)Engine\camera\;$(ProjectDir)Engine\input\;$(ProjectDir)Engine\utility;$(ProjectDir)lib\DirectXTex\include;$(ProjectDir)lib\imgui\include;$(ProjectDir)lib\fbx_sdk\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib\$(Configuration);$(ProjectDir)lib\imgui\lib\$(Configuration);$(ProjectDir)lib\DirectXTex\lib\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)Application\;$(ProjectDir)Application\scene\;$(ProjectDir)Engine\2d;$(ProjectDir)Engine\3d\collider\mesh\;$(ProjectDir)Engine\3d\collider\raycast\;$(ProjectDir)Engine\3d\collider\sphere\;$(ProjectDir)Engine\3d\collider\;$(ProjectDir)Engine\3d\fbx\;$(ProjectDir)Engine\3d\light\;$(ProjectDir)Engine\3d\obj\;$(ProjectDir)Engine\3d\particle\;$(ProjectDir)Engine\audio\;$(ProjectDir)Engine\base\;$(ProjectDir)Engine\camera\;$(ProjectDir)Engine\input\;$(ProjectDir)Engine\utility;$(ProjectDir)lib\DirectXTex\include;$(ProjectDir)lib\fbx_sdk\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib\$(Configuration);$(ProjectDir)lib\DirectXTex\lib\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -66,7 +66,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;%(AdditionalDependencies);DirectXTex.lib;imgui.lib</AdditionalDependencies>
+      <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;%(AdditionalDependencies);DirectXTex.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/IGNORE:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>

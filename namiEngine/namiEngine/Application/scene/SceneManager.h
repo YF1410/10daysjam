@@ -1,6 +1,5 @@
 #pragma once
 #include "SceneInterface.h"
-#include "StageManager.h"
 class SceneManager
 {
 public:
@@ -12,7 +11,7 @@ public:
 
 	void Draw();
 
-	void ToGameScene(StageManager::StageType stageType);
+	void ToGameScene();
 
 private:
 	void changeScene(SceneInterface* scene);

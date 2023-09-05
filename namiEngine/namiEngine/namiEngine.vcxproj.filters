@@ -42,29 +42,11 @@
     <ClCompile Include="Application\NamiGame.cpp">
       <Filter>Application</Filter>
     </ClCompile>
-    <ClCompile Include="Application\scene\GameOverScene.cpp">
-      <Filter>Application\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Application\scene\GameScene.cpp">
       <Filter>Application\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Application\scene\SceneManager.cpp">
       <Filter>Application\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\scene\TitleScene.cpp">
-      <Filter>Application\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\gameObject\enemy\BaseEnemy.cpp">
-      <Filter>Application\GameObject\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\gameObject\enemy\BulletEnemy.cpp">
-      <Filter>Application\GameObject\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\gameObject\enemy\ElementEnemy.cpp">
-      <Filter>Application\GameObject\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\gameObject\element\ElementObject.cpp">
-      <Filter>Application\GameObject\Element</Filter>
     </ClCompile>
     <ClCompile Include="Engine\2d\DebugText.cpp">
       <Filter>Engine\2D</Filter>
@@ -147,27 +129,6 @@
     <ClCompile Include="Engine\utility\Easing.cpp">
       <Filter>Engine\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Application\gameObject\bullet\Bullet.cpp">
-      <Filter>Application\GameObject\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\gameObject\player\Player.cpp">
-      <Filter>Application\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\scene\TutorialScene.cpp">
-      <Filter>Application\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\scene\GameClearScene.cpp">
-      <Filter>Application\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\gameObject\enemy\TackleEnemy.cpp">
-      <Filter>Application\GameObject\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\gameObject\enemy\InvisibleEnemy.cpp">
-      <Filter>Application\GameObject\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\scene\StageManager.cpp">
-      <Filter>Application\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\utility\FixFPS.cpp">
       <Filter>Engine\Utility</Filter>
     </ClCompile>
@@ -179,9 +140,6 @@
     <ClInclude Include="Application\NamiGame.h">
       <Filter>Application</Filter>
     </ClInclude>
-    <ClInclude Include="Application\scene\GameOverScene.h">
-      <Filter>Application\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Application\scene\GameScene.h">
       <Filter>Application\Scene</Filter>
     </ClInclude>
@@ -190,24 +148,6 @@
     </ClInclude>
     <ClInclude Include="Application\scene\SceneManager.h">
       <Filter>Application\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\scene\TitleScene.h">
-      <Filter>Application\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\gameObject\enemy\BaseEnemy.h">
-      <Filter>Application\GameObject\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\gameObject\enemy\BulletEnemy.h">
-      <Filter>Application\GameObject\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\gameObject\enemy\ElementEnemy.h">
-      <Filter>Application\GameObject\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\gameObject\element\ElementObject.h">
-      <Filter>Application\GameObject\Element</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\gameObject\player\Player.h">
-      <Filter>Application\GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="Engine\2d\DebugText.h">
       <Filter>Engine\2D</Filter>
@@ -320,26 +260,8 @@
     <ClInclude Include="Engine\utility\Vector3.h">
       <Filter>Engine\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Application\gameObject\bullet\Bullet.h">
-      <Filter>Application\GameObject\Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\camera\Camera.h">
       <Filter>Engine\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\scene\TutorialScene.h">
-      <Filter>Application\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\scene\GameClearScene.h">
-      <Filter>Application\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\gameObject\enemy\TackleEnemy.h">
-      <Filter>Application\GameObject\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\gameObject\enemy\InvisibleEnemy.h">
-      <Filter>Application\GameObject\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\scene\StageManager.h">
-      <Filter>Application\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Engine\utility\FixFPS.h">
       <Filter>Engine\Utility</Filter>

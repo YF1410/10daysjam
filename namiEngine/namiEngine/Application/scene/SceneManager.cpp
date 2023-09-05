@@ -19,9 +19,8 @@ void SceneManager::Draw()
 	scene_->Draw();
 }
 
-void SceneManager::ToGameScene(StageManager::StageType stageType)
+void SceneManager::ToGameScene()
 {
-	StageManager::GetInstance()->SetStageType(stageType);
 	Initialize(new GameScene);
 }
 
