@@ -51,8 +51,17 @@ void GameScene::Initialize() {
 	
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			tile[i][j] = Sprite::Create(5, { 128.0f + i * 128.0f, 128.0f + j * 128.0f });
-			tile[i][j]->SetSize({ 128.0f,128.0f });
+			float tileSize = 128.0f;
+			tile[i][j] = Sprite::Create(5, { 200.0f + i * tileSize, 250.0f + j * tileSize });
+			tile[i][j]->SetSize({ tileSize,tileSize });
+		}
+	}
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			float subTileSize = 80.0f;
+			subTile[i][j] = Sprite::Create(5, { 1110.0f + i * subTileSize, 350.0f + j * subTileSize });
+			subTile[i][j]->SetSize({ subTileSize,subTileSize });
 		}
 	}
 
@@ -168,6 +177,12 @@ void GameScene::Draw() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			tile[i][j]->Draw();
+		}
+	}
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			subTile[i][j]->Draw();
 		}
 	}
 

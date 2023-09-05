@@ -74,6 +74,7 @@ protected: // メンバ変数
 	std::unique_ptr<Sprite> blockSprite[3];//ブロックの種類(0:〇、1:△、2:♢)
 	std::unique_ptr<Sprite> cursor;
 	std::unique_ptr<Sprite> tile[4][4];
+	std::unique_ptr<Sprite> subTile[4][4];
 	std::unique_ptr<Sprite> number[10];//数字0～9
 	std::unique_ptr<Sprite> colon;//コロン(:)
 	std::unique_ptr<Sprite> scoreSprite;//SCOREロゴ
