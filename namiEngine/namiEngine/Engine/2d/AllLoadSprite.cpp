@@ -28,6 +28,62 @@ void AllLoadSprite::AllLoadTexture()
 		return;
 	}
 
+	if (!Sprite::LoadTexture(10, L"Resources/sprite/0.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(11, L"Resources/sprite/1.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(12, L"Resources/sprite/2.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(13, L"Resources/sprite/3.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(14, L"Resources/sprite/4.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(15, L"Resources/sprite/5.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(16, L"Resources/sprite/6.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(17, L"Resources/sprite/7.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(18, L"Resources/sprite/8.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(19, L"Resources/sprite/9.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(20, L"Resources/sprite/colon.png"))
+	{
+		assert(0);
+		return;
+	}
+
 	/*if (!Sprite::LoadTexture(46, L"Resources/gameover.png")) {
 		assert(0);
 		return;
