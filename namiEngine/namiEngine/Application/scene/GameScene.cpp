@@ -39,12 +39,14 @@ void GameScene::Initialize() {
 	// テクスチャ読み込み
 
 	//スプライト生成
-	fadeSprite = Sprite::Create(2, { 0.0f,0.0f }, fadeColor);
+	//fadeSprite = Sprite::Create(2, { 0.0f,0.0f }, fadeColor);
 
 	for (int i = 0; i < 3; i++)
 	{
 		blockSprite[i] = Sprite::Create(i + 1, { i * 64.0f,0.0f });
 	}
+
+	cursor = Sprite::Create(4, { 0.0f,0.0f });
 	// 背景スプライト生成
 
 	// パーティクルマネージャ生成
@@ -84,13 +86,7 @@ void GameScene::Finalize()
 }
 
 void GameScene::Update() {
-	if (isFadeIn) {
-		fadeColor.w -= 0.02f;
-		fadeSprite->SetColor(fadeColor);
-		if (fadeColor.w <= 0.0f) {
-			isFadeIn = false;
-		}
-	}
+	cursor->SetPosition(input->GetMousePosition());
 }
 
 
@@ -143,6 +139,8 @@ void GameScene::Draw() {
 	{
 		blockSprite[i]->Draw();
 	}
+
+	cursor->Draw();
 	// デバッグテキストの描画
 	debugText->DrawAll();
 

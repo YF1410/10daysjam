@@ -72,6 +72,7 @@ protected: // メンバ変数
 	std::unique_ptr<Sprite> fadeSprite;
 
 	std::unique_ptr<Sprite> blockSprite[3];//ブロックの種類(0:〇、1:△、2:♢)
+	std::unique_ptr<Sprite> cursor;
 
 	XMFLOAT4 fadeColor = { 1.0f,1.0f,1.0f,1.0f };
 	bool isFadeOut = false;
