@@ -77,14 +77,24 @@ protected: // メンバ変数
 	std::unique_ptr<Sprite> subTile[4][4];
 	std::unique_ptr<Sprite> number[10];//数字0～9
 	std::unique_ptr<Sprite> colon;//コロン(:)
-	std::unique_ptr<Sprite> scoreSprite;//SCOREロゴ
 	std::unique_ptr<Sprite> nextSprite;//NEXTロゴ
 
 	//制限時間関連
+	std::unique_ptr<Sprite> timeSprite;//TIMEロゴ
 	std::unique_ptr<Sprite> colonTime;//コロン(:)
 	std::unique_ptr<Sprite> hunSecTime[10];//[1]20
 	std::unique_ptr<Sprite> tenSecTime[10];//1[2]0
 	std::unique_ptr<Sprite> oneSecTime[10];//12[0]
+
+	//スコア関連
+	std::unique_ptr<Sprite> scoreSprite;//SCOREロゴ
+	std::unique_ptr<Sprite> colonScore;//コロン(:)
+	std::unique_ptr<Sprite> hunThouScore[10];//[0]00000
+	std::unique_ptr<Sprite> tenThouScore[10];//0[0]0000
+	std::unique_ptr<Sprite> thouScore[10];//00[0]000
+	std::unique_ptr<Sprite> hunScore[10];//000[0]00
+	std::unique_ptr<Sprite> tenScore[10];//0000[0]0
+	std::unique_ptr<Sprite> oneScore[10];//00000[0]
 
 	//リザルト画面用
 	std::unique_ptr<Sprite> retrySprite;//RETRYロゴ
@@ -126,4 +136,7 @@ protected: // メンバ変数
 	int calculatedTime = 0.0f;//表示用に計算された制限時間
 	int drawTime[3];//スコア表示用(0:百 1:十 2:一)
 
+	//スコア関連
+	int score = 334131;//スコア
+	int drawScore[6];//スコア表示用(0:十万 1:万 2:千 3:百 4:十 5:一)
 };

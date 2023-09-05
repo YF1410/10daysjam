@@ -127,6 +127,11 @@ void AllLoadSprite::AllLoadTexture()
 		assert(0);
 		return;
 	}
+	if (!Sprite::LoadTexture(26, L"Resources/sprite/time.png"))
+	{
+		assert(0);
+		return;
+	}
 
 	/*if (!Sprite::LoadTexture(46, L"Resources/gameover.png")) {
 		assert(0);
