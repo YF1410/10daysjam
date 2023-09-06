@@ -77,6 +77,8 @@ public: // メンバ関数
 	void VertexBufferGeneration();
 	// 角度の設定
 	void SetRotation(float rotation);
+
+	XMFLOAT2 GetPosition() { return position; }
 	// 座標の設定
 	void SetPosition(XMFLOAT2 position);
 	// サイズの設定

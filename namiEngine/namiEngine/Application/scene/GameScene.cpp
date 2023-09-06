@@ -10,6 +10,7 @@
 #include <time.h>
 
 
+
 using namespace DirectX;
 
 GameScene::GameScene() {
@@ -48,10 +49,9 @@ void GameScene::Initialize() {
 	}
 
 	cursor = Sprite::Create(4, { 0.0f,0.0f });
-	
+
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			float tileSize = 128.0f;
 			tile[i][j] = Sprite::Create(5, { 200.0f + i * tileSize, 250.0f + j * tileSize });
 			tile[i][j]->SetSize({ tileSize,tileSize });
 		}
@@ -176,6 +176,144 @@ void GameScene::Update() {
 	drawScore[3] = (score / 100) % 10;//000[0]00
 	drawScore[4] = (score / 10) % 10;//0000[0]0
 	drawScore[5] = score % 10;//00000[0]
+
+	//マウスカーソル
+	if (input->TriggerMouse(LeftButton)) {
+		saveCursorPos = cursor->GetPosition();
+	}
+	if (input->PushMouse(LeftButton)) {
+		cursor->SetColor({ 1.0f,1.0f,0.0f,1.0f });
+	}
+	else {
+		cursor->SetColor({ 1.0f,1.0f,1.0f,1.0f });
+	}
+	if (!input->PushMouse(LeftButton)) {
+		xFlag = false;
+		yFlag = false;
+	}
+
+	XMFLOAT2 cursorPos = cursor->GetPosition();
+
+	//横に動かしたか縦に動かしたかの確認
+	float a = saveCursorPos.x - cursorPos.x;
+	float b = cursorPos.x - saveCursorPos.x;
+	float c = saveCursorPos.y - cursorPos.y;
+	float d = cursorPos.y - saveCursorPos.y;
+	float xTmp = 0.0f;
+	float yTmp = 0.0f;
+
+	if (a < b) {
+		xTmp = a;
+		a = b;
+		b = xTmp;
+	}
+
+	if (c < d) {
+		yTmp = c;
+		c = d;
+		d = yTmp;
+	}
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (!input->PushMouse(LeftButton)) {
+				tile[i][j]->SetColor({ 1.0f,1.0f,1.0f,1.0f });
+			}
+			XMFLOAT2 tilePos = tile[i][j]->GetPosition();
+
+			if (a > c && !yFlag) {
+				//x軸処理
+				xFlag = true;
+				if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
+					if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
+						if (input->PushMouse(LeftButton)) {
+							tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
+						}
+					}
+				}
+
+			}
+			else if (a < c && !xFlag) {
+				//y軸処理
+				yFlag = true;
+				if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
+					if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
+						if (input->PushMouse(LeftButton)) {
+							tile[i][j]->SetColor({ 0.0f,0.0f,1.0f,1.0f });
+						}
+					}
+				}
+
+			}
+
+			//x軸の判定
+			/*if (saveCursorPos.x < cursorPos.x) {
+				if (saveCursorPos.x - cursorPos.x < saveCursorPos.y - cursorPos.y || saveCursorPos.x - cursorPos.x < (saveCursorPos.y - cursorPos.y) * -1) {
+					if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
+						if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
+							if (input->PushMouse(LeftButton)) {
+								tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
+							}
+						}
+					}
+				}
+			}
+			else if (saveCursorPos.x > cursorPos.x) {
+				if (cursorPos.x - saveCursorPos.x < cursorPos.y - saveCursorPos.y || cursorPos.x - saveCursorPos.x < (cursorPos.y - saveCursorPos.y) * -1) {
+					if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
+						if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
+							if (input->PushMouse(LeftButton)) {
+								tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
+							}
+						}
+					}
+				}
+			}*/
+
+			/*if (saveCursorPos.y < cursorPos.y) {
+				if (saveCursorPos.y - cursorPos.y < saveCursorPos.x - cursorPos.x || saveCursorPos.y - cursorPos.y < (saveCursorPos.x - cursorPos.x) * -1) {
+					if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
+						if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
+							if (input->PushMouse(LeftButton)) {
+								tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
+							}
+						}
+					}
+				}
+			}
+			else if (saveCursorPos.y > cursorPos.y) {
+				if (cursorPos.y - saveCursorPos.y < cursorPos.x - saveCursorPos.x || cursorPos.y - saveCursorPos.y < (cursorPos.x - saveCursorPos.x) * -1) {
+					if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
+						if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
+							if (input->PushMouse(LeftButton)) {
+								tile[i][j]->SetColor({ 0.0f,0.0f,1.0f,1.0f });
+							}
+						}
+					}
+				}
+			}*/
+
+			/*if (saveCursorPos.x - cursorPos.x > saveCursorPos.y - cursorPos.y || cursorPos.x - saveCursorPos.x > cursorPos.y - saveCursorPos.y) {
+				if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
+					if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
+						if (input->PushMouse(LeftButton)) {
+							tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
+						}
+					}
+				}
+			}
+			if (saveCursorPos.x - cursorPos.x < saveCursorPos.y - cursorPos.y || cursorPos.x - saveCursorPos.x < cursorPos.y - saveCursorPos.y) {
+				if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
+					if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
+						if (input->PushMouse(LeftButton)) {
+							tile[i][j]->SetColor({ 0.0f,0.0f,1.0f,1.0f });
+						}
+					}
+				}
+			}*/
+		}
+	}
+
 }
 
 

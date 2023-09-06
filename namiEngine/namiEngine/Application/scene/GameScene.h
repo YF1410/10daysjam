@@ -73,7 +73,11 @@ protected: // メンバ変数
 
 	std::unique_ptr<Sprite> blockSprite[3];//ブロックの種類(0:〇、1:△、2:♢)
 	std::unique_ptr<Sprite> cursor;
+	XMFLOAT2 saveCursorPos = { 0.0f,0.0f };
 	std::unique_ptr<Sprite> tile[4][4];
+	float tileSize = 128.0f;
+	bool xFlag = false;
+	bool yFlag = false;
 	std::unique_ptr<Sprite> subTile[4][4];
 	std::unique_ptr<Sprite> number[10];//数字0～9
 	std::unique_ptr<Sprite> colon;//コロン(:)
