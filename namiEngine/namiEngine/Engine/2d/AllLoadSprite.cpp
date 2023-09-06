@@ -132,6 +132,21 @@ void AllLoadSprite::AllLoadTexture()
 		assert(0);
 		return;
 	}
+	if (!Sprite::LoadTexture(27, L"Resources/sprite/start.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(28, L"Resources/sprite/finish.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(29, L"Resources/sprite/clickstart.png"))
+	{
+		assert(0);
+		return;
+	}
 
 	/*if (!Sprite::LoadTexture(46, L"Resources/gameover.png")) {
 		assert(0);
