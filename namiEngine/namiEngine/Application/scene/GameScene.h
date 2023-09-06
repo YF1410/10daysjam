@@ -83,6 +83,13 @@ protected: // メンバ変数
 	std::unique_ptr<Sprite> colon;//コロン(:)
 	std::unique_ptr<Sprite> nextSprite;//NEXTロゴ
 
+	std::unique_ptr<Sprite> circle[4][4];//画面左のブロック(〇)
+	std::unique_ptr<Sprite> triangle[4][4];//画面左のブロック(△)
+	std::unique_ptr<Sprite> square[4][4];//画面左のブロック(♢)
+	std::unique_ptr<Sprite> subCircle[4][4];//画面右のブロック(〇)
+	std::unique_ptr<Sprite> subTriangle[4][4];//画面右のブロック(△)
+	std::unique_ptr<Sprite> subSquare[4][4];//画面右のブロック(♢)
+
 	//制限時間関連
 	std::unique_ptr<Sprite> timeSprite;//TIMEロゴ
 	std::unique_ptr<Sprite> colonTime;//コロン(:)
@@ -141,6 +148,16 @@ protected: // メンバ変数
 	int drawTime[3];//スコア表示用(0:百 1:十 2:一)
 
 	//スコア関連
-	int score = 334131;//スコア
+	int score = 0;//スコア
 	int drawScore[6];//スコア表示用(0:十万 1:万 2:千 3:百 4:十 5:一)
+
+	//ブロック表示関連
+	float tilePattern[4][4];//画面左のブロック配置(0:なし 1:〇 2:△ 3:♢)
+	float subTilePattern[4][4];//画面右のブロック配置(0:なし 1:〇 2:△ 3:♢)
+	bool circleArive[4][4];//画面左の〇の表示(0:非表示 1:表示)
+	bool triangleArive[4][4];//画面左の△の表示(0:非表示 1:表示)
+	bool squareArive[4][4];//画面左の♢の表示(0:非表示 1:表示)
+	bool subCircleArive[4][4];//画面右の〇の表示(0:非表示 1:表示)
+	bool subTriangleArive[4][4];//画面右の△の表示(0:非表示 1:表示)
+	bool subSquareArive[4][4];//画面右の〇の表示(0:非表示 1:表示)
 };

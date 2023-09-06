@@ -37,6 +37,8 @@ void GameScene::Initialize() {
 	debugText = DebugText::GetInstance();
 	debugText->Initialize(debugTextTexNumber);
 
+	srand(time(NULL));//乱数初期化
+
 	// テクスチャ読み込み
 
 	//スプライト生成
@@ -62,6 +64,60 @@ void GameScene::Initialize() {
 			float subTileSize = 80.0f;
 			subTile[i][j] = Sprite::Create(5, { 1110.0f + i * subTileSize, 350.0f + j * subTileSize });
 			subTile[i][j]->SetSize({ subTileSize,subTileSize });
+		}
+	}
+
+	//画面左のブロック(〇)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			float tileSize = 128.0f;
+			circle[i][j] = Sprite::Create(1, { 200.0f + i * tileSize, 250.0f + j * tileSize });
+			circle[i][j]->SetSize({ tileSize,tileSize });
+		}
+	}
+
+	//画面左のブロック(△)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			float tileSize = 128.0f;
+			triangle[i][j] = Sprite::Create(2, { 200.0f + i * tileSize, 250.0f + j * tileSize });
+			triangle[i][j]->SetSize({ tileSize,tileSize });
+		}
+	}
+
+	//画面左のブロック(♢)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			float tileSize = 128.0f;
+			square[i][j] = Sprite::Create(3, { 200.0f + i * tileSize, 250.0f + j * tileSize });
+			square[i][j]->SetSize({ tileSize,tileSize });
+		}
+	}
+
+	//画面右のブロック(〇)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			float subTileSize = 80.0f;
+			subCircle[i][j] = Sprite::Create(1, { 1110.0f + i * subTileSize, 350.0f + j * subTileSize });
+			subCircle[i][j]->SetSize({ subTileSize,subTileSize });
+		}
+	}
+
+	//画面右のブロック(△)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			float subTileSize = 80.0f;
+			subTriangle[i][j] = Sprite::Create(2, { 1110.0f + i * subTileSize, 350.0f + j * subTileSize });
+			subTriangle[i][j]->SetSize({ subTileSize,subTileSize });
+		}
+	}
+
+	//画面右のブロック(♢)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			float subTileSize = 80.0f;
+			subSquare[i][j] = Sprite::Create(3, { 1110.0f + i * subTileSize, 350.0f + j * subTileSize });
+			subSquare[i][j]->SetSize({ subTileSize,subTileSize });
 		}
 	}
 
@@ -121,6 +177,26 @@ void GameScene::Initialize() {
 		oneScore[i] = Sprite::Create(10 + i, { 1445.0f, 100.0f });//00000[0]
 	}
 
+	//ブロック表示関連初期化
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			tilePattern[i][j] = 0.0f;//画面左のブロック配置(0:なし 1:〇 2:△ 3:♢)
+			subTilePattern[i][j] = 0.0f;//画面右のブロック配置(0:なし 1:〇 2:△ 3:♢)
+			circleArive[i][j] = false;//画面左の〇の表示(0:非表示 1:表示)
+			triangleArive[i][j] = false;//画面左の△の表示(0:非表示 1:表示)
+			squareArive[i][j] = false;//画面左の♢の表示(0:非表示 1:表示)
+			subCircleArive[i][j] = false;//画面右の〇の表示(0:非表示 1:表示)
+			subTriangleArive[i][j] = false;//画面右の△の表示(0:非表示 1:表示)
+			subSquareArive[i][j] = false;//画面右の〇の表示(0:非表示 1:表示)
+
+			//左右のタイルにランダムでブロック配置
+			tilePattern[i][j] = (rand() % 3) + 1;
+			subTilePattern[i][j] = (rand() % 3) + 1;
+		}
+	}
+
 	// 背景スプライト生成
 
 	// パーティクルマネージャ生成
@@ -163,7 +239,7 @@ void GameScene::Update() {
 	cursor->SetPosition(input->GetMousePosition());
 
 	//制限時間関連
-	gameTime--;//制限時間を減らす
+	if (gameTime > 0) { gameTime--; }//制限時間を減らす
 	calculatedTime = gameTime / 60;//制限時間表示用に計算
 	drawTime[0] = (calculatedTime / 100) % 10;//[1]00
 	drawTime[1] = (calculatedTime / 10) % 10;//0[1]0
@@ -176,6 +252,38 @@ void GameScene::Update() {
 	drawScore[3] = (score / 100) % 10;//000[0]00
 	drawScore[4] = (score / 10) % 10;//0000[0]0
 	drawScore[5] = score % 10;//00000[0]
+
+	//ブロック配置関連
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			if (tilePattern[i][j] == 1.0f)
+			{
+				circleArive[i][j] = true;
+			}
+			if (tilePattern[i][j] == 2.0f)
+			{
+				triangleArive[i][j] = true;
+			}
+			if (tilePattern[i][j] == 3.0f)
+			{
+				squareArive[i][j] = true;
+			}
+			if (subTilePattern[i][j] == 1.0f)
+			{
+				subCircleArive[i][j] = true;
+			}
+			if (subTilePattern[i][j] == 2.0f)
+			{
+				subTriangleArive[i][j] = true;
+			}
+			if (subTilePattern[i][j] == 3.0f)
+			{
+				subSquareArive[i][j] = true;
+			}
+		}
+	}
 
 	//マウスカーソル
 	if (input->TriggerMouse(LeftButton)) {
@@ -377,6 +485,60 @@ void GameScene::Draw() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			subTile[i][j]->Draw();
+		}
+	}
+
+	//画面左のブロック(〇)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (circleArive[i][j]) {
+				circle[i][j]->Draw();
+			}
+		}
+	}
+
+	//画面左のブロック(△)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (triangleArive[i][j]) {
+				triangle[i][j]->Draw();
+			}
+		}
+	}
+
+	//画面左のブロック(♢)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (squareArive[i][j]) {
+				square[i][j]->Draw();
+			}
+		}
+	}
+
+	//画面右のブロック(〇)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (subCircleArive[i][j]) {
+				subCircle[i][j]->Draw();
+			}
+		}
+	}
+
+	//画面右のブロック(△)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (subTriangleArive[i][j]) {
+				subTriangle[i][j]->Draw();
+			}
+		}
+	}
+
+	//画面右のブロック(♢)
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (subSquareArive[i][j]) {
+				subSquare[i][j]->Draw();
+			}
 		}
 	}
 
