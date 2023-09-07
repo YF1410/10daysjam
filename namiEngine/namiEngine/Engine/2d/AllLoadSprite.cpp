@@ -147,6 +147,11 @@ void AllLoadSprite::AllLoadTexture()
 		assert(0);
 		return;
 	}
+	if (!Sprite::LoadTexture(30, L"Resources/sprite/background.png"))
+	{
+		assert(0);
+		return;
+	}
 
 	/*if (!Sprite::LoadTexture(46, L"Resources/gameover.png")) {
 		assert(0);

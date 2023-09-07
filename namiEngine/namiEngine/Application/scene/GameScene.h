@@ -63,6 +63,12 @@ public: // メンバ関数
 	/// </summary>
 	void Draw() override;
 
+	//タイトルシーン処理
+	void TitleScene();
+
+	//リザルトシーン処理
+	void ResultScene();
+
 protected: // メンバ変数
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
@@ -82,6 +88,11 @@ protected: // メンバ変数
 	std::unique_ptr<Sprite> number[10];//数字0～9
 	std::unique_ptr<Sprite> colon;//コロン(:)
 	std::unique_ptr<Sprite> nextSprite;//NEXTロゴ
+	std::unique_ptr<Sprite> backGround;//ゲーム背景
+
+	std::unique_ptr<Sprite> startSprite;//STARTロゴ
+	std::unique_ptr<Sprite> finishSprite;//FINISHロゴ
+	std::unique_ptr<Sprite> clickSprite;//CLICKSTARTロゴ
 
 	std::unique_ptr<Sprite> circle[4][4];//画面左のブロック(〇)
 	std::unique_ptr<Sprite> triangle[4][4];//画面左のブロック(△)

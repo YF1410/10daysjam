@@ -44,6 +44,8 @@ void GameScene::Initialize() {
 	//スプライト生成
 	//fadeSprite = Sprite::Create(2, { 0.0f,0.0f }, fadeColor);
 
+	backGround = Sprite::Create(30, { 0.0f,0.0f });
+
 	//ブロックの模様
 	for (int i = 0; i < 3; i++)
 	{
@@ -54,7 +56,7 @@ void GameScene::Initialize() {
 
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			tile[i][j] = Sprite::Create(5, { 200.0f + i * tileSize, 250.0f + j * tileSize });
+			tile[i][j] = Sprite::Create(5, { 280.0f + i * tileSize, 256.0f + j * tileSize });
 			tile[i][j]->SetSize({ tileSize,tileSize });
 		}
 	}
@@ -62,7 +64,7 @@ void GameScene::Initialize() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			float subTileSize = 80.0f;
-			subTile[i][j] = Sprite::Create(5, { 1110.0f + i * subTileSize, 350.0f + j * subTileSize });
+			subTile[i][j] = Sprite::Create(5, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
 			subTile[i][j]->SetSize({ subTileSize,subTileSize });
 		}
 	}
@@ -71,7 +73,7 @@ void GameScene::Initialize() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			float tileSize = 128.0f;
-			circle[i][j] = Sprite::Create(1, { 200.0f + i * tileSize, 250.0f + j * tileSize });
+			circle[i][j] = Sprite::Create(1, { 280.0f + i * tileSize, 256.0f + j * tileSize });
 			circle[i][j]->SetSize({ tileSize,tileSize });
 		}
 	}
@@ -80,7 +82,7 @@ void GameScene::Initialize() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			float tileSize = 128.0f;
-			triangle[i][j] = Sprite::Create(2, { 200.0f + i * tileSize, 250.0f + j * tileSize });
+			triangle[i][j] = Sprite::Create(2, { 280.0f + i * tileSize, 256.0f + j * tileSize });
 			triangle[i][j]->SetSize({ tileSize,tileSize });
 		}
 	}
@@ -89,7 +91,7 @@ void GameScene::Initialize() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			float tileSize = 128.0f;
-			square[i][j] = Sprite::Create(3, { 200.0f + i * tileSize, 250.0f + j * tileSize });
+			square[i][j] = Sprite::Create(3, { 280.0f + i * tileSize, 256.0f + j * tileSize });
 			square[i][j]->SetSize({ tileSize,tileSize });
 		}
 	}
@@ -98,7 +100,7 @@ void GameScene::Initialize() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			float subTileSize = 80.0f;
-			subCircle[i][j] = Sprite::Create(1, { 1110.0f + i * subTileSize, 350.0f + j * subTileSize });
+			subCircle[i][j] = Sprite::Create(1, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
 			subCircle[i][j]->SetSize({ subTileSize,subTileSize });
 		}
 	}
@@ -107,7 +109,7 @@ void GameScene::Initialize() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			float subTileSize = 80.0f;
-			subTriangle[i][j] = Sprite::Create(2, { 1110.0f + i * subTileSize, 350.0f + j * subTileSize });
+			subTriangle[i][j] = Sprite::Create(2, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
 			subTriangle[i][j]->SetSize({ subTileSize,subTileSize });
 		}
 	}
@@ -116,7 +118,7 @@ void GameScene::Initialize() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			float subTileSize = 80.0f;
-			subSquare[i][j] = Sprite::Create(3, { 1110.0f + i * subTileSize, 350.0f + j * subTileSize });
+			subSquare[i][j] = Sprite::Create(3, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
 			subSquare[i][j]->SetSize({ subTileSize,subTileSize });
 		}
 	}
@@ -131,50 +133,50 @@ void GameScene::Initialize() {
 	scoreSprite = Sprite::Create(6, { 1000.0f, 100.0f });
 
 	//NEXTロゴ
-	nextSprite = Sprite::Create(7, { 1200.0f, 250.0f });
+	nextSprite = Sprite::Create(7, { 1272.0f, 251.0f });
 
 	//制限時間関連
-	timeSprite = Sprite::Create(26, { 330.0f, 80.0f });//TIMEロゴ
-	colonTime = Sprite::Create(20, { 460.0f, 80.0f });//コロン(:)
+	timeSprite = Sprite::Create(26, { 408.0f, 103.0f });//TIMEロゴ
+	colonTime = Sprite::Create(20, { 538.0f, 103.0f });//コロン(:)
 	for (int i = 0; i < 10; i++)
 	{
-		hunSecTime[i] = Sprite::Create(10 + i, { 495.0f, 80.0f });//[1]20
+		hunSecTime[i] = Sprite::Create(10 + i, { 568.0f, 103.0f });//[1]20
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		tenSecTime[i] = Sprite::Create(10 + i, { 530.0f, 80.0f });//1[2]0
+		tenSecTime[i] = Sprite::Create(10 + i, { 598.0f, 103.0f });//1[2]0
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		oneSecTime[i] = Sprite::Create(10 + i, { 565.0f, 80.0f });//12[0]
+		oneSecTime[i] = Sprite::Create(10 + i, { 628.0f, 103.0f });//12[0]
 	}
 
 	//スコア関連
-	scoreSprite = Sprite::Create(6, { 1070.0f, 100.0f });//SCOREロゴ
-	colonScore = Sprite::Create(20, { 1235.0f, 100.0f });//コロン(:)
+	scoreSprite = Sprite::Create(6, { 1153.0f, 100.0f });//SCOREロゴ
+	colonScore = Sprite::Create(20, { 1317.0f, 100.0f });//コロン(:)
 	for (int i = 0; i < 10; i++)
 	{
-		hunThouScore[i] = Sprite::Create(10 + i, { 1270.0f, 100.0f });//[0]00000
+		hunThouScore[i] = Sprite::Create(10 + i, { 1347.0f, 100.0f });//[0]00000
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		tenThouScore[i] = Sprite::Create(10 + i, { 1305.0f, 100.0f });//0[0]0000
+		tenThouScore[i] = Sprite::Create(10 + i, { 1379.0f, 100.0f });//0[0]0000
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		thouScore[i] = Sprite::Create(10 + i, { 1340.0f, 100.0f });//00[0]000
+		thouScore[i] = Sprite::Create(10 + i, { 1411.0f, 100.0f });//00[0]000
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		hunScore[i] = Sprite::Create(10 + i, { 1375.0f, 100.0f });//000[0]00
+		hunScore[i] = Sprite::Create(10 + i, { 1443.0f, 100.0f });//000[0]00
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		tenScore[i] = Sprite::Create(10 + i, { 1410.0f, 100.0f });//0000[0]0
+		tenScore[i] = Sprite::Create(10 + i, { 1475.0f, 100.0f });//0000[0]0
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		oneScore[i] = Sprite::Create(10 + i, { 1445.0f, 100.0f });//00000[0]
+		oneScore[i] = Sprite::Create(10 + i, { 1507.0f, 100.0f });//00000[0]
 	}
 
 	//ブロック表示関連初期化
@@ -196,6 +198,29 @@ void GameScene::Initialize() {
 			subTilePattern[i][j] = (rand() % 3) + 1;
 		}
 	}
+
+	//STARTロゴ
+	startSprite = Sprite::Create(27, { 711.5f, 425.0f });
+	//FINISHロゴ
+	finishSprite = Sprite::Create(28, { 711.0f, 425.0f });
+	//CLICKSTARTロゴ
+	clickSprite = Sprite::Create(29, { 800.0f, 450.0f });
+
+	//リザルト画面関連
+	//RESULTロゴ
+	resultSprite = Sprite::Create(21, { 800.0f, 450.0f });
+	//RANKロゴ
+	rankSprite = Sprite::Create(22, { 800.0f, 450.0f });
+	//Aロゴ
+	aSprite = Sprite::Create(23, { 800.0f, 450.0f });
+	//Bロゴ
+	bSprite = Sprite::Create(24, { 800.0f, 450.0f });
+	//Cロゴ
+	cSprite = Sprite::Create(25, { 800.0f, 450.0f });
+	//RETRYロゴ
+	retrySprite = Sprite::Create(8, { 800.0f, 450.0f });
+	//TITLEロゴ
+	titleSprite = Sprite::Create(9, { 800.0f, 450.0f });
 
 	// 背景スプライト生成
 
@@ -455,6 +480,8 @@ void GameScene::Draw() {
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
 
+	backGround->Draw();
+
 	// スプライト描画後処理
 	Sprite::PostDraw();
 	// 深度バッファクリア
@@ -488,7 +515,7 @@ void GameScene::Draw() {
 	//ブロックの模様
 	for (int i = 0; i < 3; i++)
 	{
-		blockSprite[i]->Draw();
+		//blockSprite[i]->Draw();
 	}
 
 	for (int i = 0; i < 4; i++) {
@@ -590,4 +617,22 @@ void GameScene::Draw() {
 	// スプライト描画後処理
 	Sprite::PostDraw();
 #pragma endregion
+}
+
+void GameScene::TitleScene()
+{
+	//左クリックでゲーム画面に遷移
+	if (input->PushMouse(LeftButton))
+	{
+
+	}
+}
+
+void GameScene::ResultScene()
+{
+	//左クリックで選択したシーンに遷移
+	if (input->PushMouse(LeftButton))
+	{
+
+	}
 }
