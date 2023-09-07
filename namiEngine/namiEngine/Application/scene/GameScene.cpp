@@ -343,7 +343,6 @@ void GameScene::Update() {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (!circleArive[j][i] && !triangleArive[j][i] && !squareArive[j][i]) {
-					
 					if (tilePattern[j - 1][i] == 1.0f) {
 						circleArive[j][i] = true;
 						tilePattern[j][i] = 1.0f;
@@ -366,19 +365,23 @@ void GameScene::Update() {
 						squareArive[j - 1][i] = false;
 					}
 
-					
-					/*if (tilePattern[j - 1][i] == 1.0f) {
-						circleArive[j - 1][i] = true;
+					if(!circleArive[0][i] && !triangleArive[0][i] && !squareArive[0][i])
+					tilePattern[0][i] = (rand() % 3) + 1;
+					if (tilePattern[0][i] == 1.0f) {
+						circleArive[0][i] = true;
+						tilePattern[0][i] = 1.0f;
+
 					}
-					if (tilePattern[j - 1][i] == 2.0f) {
-						
-						triangleArive[j - 1][i] = true;
+					if (tilePattern[0][i] == 2.0f) {
+						triangleArive[0][i] = true;
+						tilePattern[0][i] = 2.0f;
+
 					}
-					if (tilePattern[j - 1][i] == 3.0f) {
-						
-						squareArive[j - 1][i] = true;
-					}*/
-					//[tilePattern[j - 2][i] = tilePattern[j - 3][i];
+					if (tilePattern[0][i] == 3.0f) {
+						squareArive[0][i] = true;
+						tilePattern[0][i] = 3.0f;
+
+					}
 				}
 			}
 		}
@@ -586,14 +589,14 @@ void GameScene::Draw() {
 	oneSecTime[drawTime[2]]->Draw();//12[0]
 
 	//スコア関連
-	//scoreSprite->Draw();//SCOREロゴ
-	//colonScore->Draw();//コロン(:)
-	//hunThouScore[drawScore[0]]->Draw();//[0]00000
-	//tenThouScore[drawScore[1]]->Draw();//0[0]0000
-	//thouScore[drawScore[2]]->Draw();//00[0]000
-	//hunScore[drawScore[3]]->Draw();//000[0]00
-	//tenScore[drawScore[4]]->Draw();//0000[0]0
-	//oneScore[drawScore[5]]->Draw();//00000[0]
+	scoreSprite->Draw();//SCOREロゴ
+	colonScore->Draw();//コロン(:)
+	hunThouScore[drawScore[0]]->Draw();//[0]00000
+	tenThouScore[drawScore[1]]->Draw();//0[0]0000
+	thouScore[drawScore[2]]->Draw();//00[0]000
+	hunScore[drawScore[3]]->Draw();//000[0]00
+	tenScore[drawScore[4]]->Draw();//0000[0]0
+	oneScore[drawScore[5]]->Draw();//00000[0]
 
 	cursor->Draw();
 	// デバッグテキストの描画
