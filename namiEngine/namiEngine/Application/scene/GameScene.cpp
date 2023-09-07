@@ -298,61 +298,76 @@ void GameScene::Update() {
 	if (!input->PushMouse(LeftButton)) {
 		xFlag = false;
 		yFlag = false;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+
+				tile[i][j]->SetColor({ 1.0f,1.0f,1.0f,1.0f });
+			}
+		}
 	}
 
 	XMFLOAT2 cursorPos = cursor->GetPosition();
 
-	//横に動かしたか縦に動かしたかの確認
-	float a = saveCursorPos.x - cursorPos.x;
-	float b = cursorPos.x - saveCursorPos.x;
-	float c = saveCursorPos.y - cursorPos.y;
-	float d = cursorPos.y - saveCursorPos.y;
-	float xTmp = 0.0f;
-	float yTmp = 0.0f;
+	if (input->PushMouse(LeftButton)) {
+		//横に動かしたか縦に動かしたかの確認
+		float a = saveCursorPos.x - cursorPos.x;
+		float b = cursorPos.x - saveCursorPos.x;
+		float c = saveCursorPos.y - cursorPos.y;
+		float d = cursorPos.y - saveCursorPos.y;
+		float xTmp = 0.0f;
+		float yTmp = 0.0f;
 
-	if (a < b) {
-		xTmp = a;
-		a = b;
-		b = xTmp;
-	}
+		if (a < b) {
+			xTmp = a;
+			a = b;
+			b = xTmp;
+		}
 
-	if (c < d) {
-		yTmp = c;
-		c = d;
-		d = yTmp;
-	}
+		if (c < d) {
+			yTmp = c;
+			c = d;
+			d = yTmp;
+		}
 
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			if (!input->PushMouse(LeftButton)) {
-				tile[i][j]->SetColor({ 1.0f,1.0f,1.0f,1.0f });
-			}
-			XMFLOAT2 tilePos = tile[i][j]->GetPosition();
+		if (a > 100.0f && !yFlag) {
+			xFlag = true;
+		}
+		if (c > 100.0f && !xFlag) {
+			yFlag = true;
+		}
 
-			if (a > c && !yFlag) {
-				//x軸処理
-				xFlag = true;
-				if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
-					if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
-						if (input->PushMouse(LeftButton)) {
-							tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				
+				XMFLOAT2 tilePos = tile[i][j]->GetPosition();
+
+				if (a > c && !yFlag) {
+					//x軸処理
+					//xFlag = true;
+					if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
+						if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
+							if (input->PushMouse(LeftButton)) {
+								tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
+							}
 						}
 					}
-				}
 
-			}
-			else if (a < c && !xFlag) {
-				//y軸処理
-				yFlag = true;
-				if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
-					if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
-						if (input->PushMouse(LeftButton)) {
-							tile[i][j]->SetColor({ 0.0f,0.0f,1.0f,1.0f });
+				}
+				else if (a < c && !xFlag) {
+					//y軸処理
+					//yFlag = true;
+					if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
+						if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
+							if (input->PushMouse(LeftButton)) {
+								tile[i][j]->SetColor({ 0.0f,0.0f,1.0f,1.0f });
+							}
 						}
 					}
-				}
 
+				}
 			}
+
+
 
 			//x軸の判定
 			/*if (saveCursorPos.x < cursorPos.x) {
