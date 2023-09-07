@@ -56,43 +56,45 @@ void GameScene::Initialize() {
 
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			tile[i][j] = Sprite::Create(5, { 280.0f + i * tileSize, 256.0f + j * tileSize });
-			tile[i][j]->SetSize({ tileSize,tileSize });
+			tile[j][i] = Sprite::Create(5, { 280.0f + i * tileSize, 256.0f + j * tileSize });
+			tile[j][i]->SetSize({ tileSize,tileSize });
+			tile[j][i]->SetColor(Sprite::Color::DEF);
 		}
 	}
 
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			float subTileSize = 80.0f;
-			subTile[i][j] = Sprite::Create(5, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
-			subTile[i][j]->SetSize({ subTileSize,subTileSize });
+			subTile[j][i] = Sprite::Create(5, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
+			subTile[j][i]->SetSize({ subTileSize,subTileSize });
+			subTile[j][i]->SetColor(Sprite::Color::DEF);
 		}
 	}
 
 	//画面左のブロック(〇)
 	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
+		for (int j = 4; j < 8; j++) {
 			float tileSize = 128.0f;
-			circle[i][j] = Sprite::Create(1, { 280.0f + i * tileSize, 256.0f + j * tileSize });
-			circle[i][j]->SetSize({ tileSize,tileSize });
+			circle[j][i] = Sprite::Create(1, { 280.0f + i * tileSize, 256.0f + (j-4) * tileSize });
+			circle[j][i]->SetSize({ tileSize,tileSize });
 		}
 	}
 
 	//画面左のブロック(△)
 	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
+		for (int j = 4; j < 8; j++) {
 			float tileSize = 128.0f;
-			triangle[i][j] = Sprite::Create(2, { 280.0f + i * tileSize, 256.0f + j * tileSize });
-			triangle[i][j]->SetSize({ tileSize,tileSize });
+			triangle[j][i] = Sprite::Create(2, { 280.0f + i * tileSize, 256.0f + (j - 4) * tileSize });
+			triangle[j][i]->SetSize({ tileSize,tileSize });
 		}
 	}
 
 	//画面左のブロック(♢)
 	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
+		for (int j = 4; j < 8; j++) {
 			float tileSize = 128.0f;
-			square[i][j] = Sprite::Create(3, { 280.0f + i * tileSize, 256.0f + j * tileSize });
-			square[i][j]->SetSize({ tileSize,tileSize });
+			square[j][i] = Sprite::Create(3, { 280.0f + i * tileSize, 256.0f + (j - 4) * tileSize });
+			square[j][i]->SetSize({ tileSize,tileSize });
 		}
 	}
 
@@ -100,8 +102,8 @@ void GameScene::Initialize() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			float subTileSize = 80.0f;
-			subCircle[i][j] = Sprite::Create(1, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
-			subCircle[i][j]->SetSize({ subTileSize,subTileSize });
+			circle[j][i] = Sprite::Create(1, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
+			circle[j][i]->SetSize({ subTileSize,subTileSize });
 		}
 	}
 
@@ -109,8 +111,8 @@ void GameScene::Initialize() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			float subTileSize = 80.0f;
-			subTriangle[i][j] = Sprite::Create(2, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
-			subTriangle[i][j]->SetSize({ subTileSize,subTileSize });
+			triangle[j][i] = Sprite::Create(2, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
+			triangle[j][i]->SetSize({ subTileSize,subTileSize });
 		}
 	}
 
@@ -118,8 +120,8 @@ void GameScene::Initialize() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			float subTileSize = 80.0f;
-			subSquare[i][j] = Sprite::Create(3, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
-			subSquare[i][j]->SetSize({ subTileSize,subTileSize });
+			square[j][i] = Sprite::Create(3, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
+			square[j][i]->SetSize({ subTileSize,subTileSize });
 		}
 	}
 
@@ -182,20 +184,18 @@ void GameScene::Initialize() {
 	//ブロック表示関連初期化
 	for (int i = 0; i < 4; i++)
 	{
-		for (int j = 0; j < 4; j++)
+		for (int j = 0; j < 8; j++)
 		{
-			tilePattern[i][j] = 0.0f;//画面左のブロック配置(0:なし 1:〇 2:△ 3:♢)
-			subTilePattern[i][j] = 0.0f;//画面右のブロック配置(0:なし 1:〇 2:△ 3:♢)
-			circleArive[i][j] = false;//画面左の〇の表示(0:非表示 1:表示)
-			triangleArive[i][j] = false;//画面左の△の表示(0:非表示 1:表示)
-			squareArive[i][j] = false;//画面左の♢の表示(0:非表示 1:表示)
-			subCircleArive[i][j] = false;//画面右の〇の表示(0:非表示 1:表示)
-			subTriangleArive[i][j] = false;//画面右の△の表示(0:非表示 1:表示)
-			subSquareArive[i][j] = false;//画面右の〇の表示(0:非表示 1:表示)
+			tilePattern[j][i] = 0.0f;//画面左のブロック配置(0:なし 1:〇 2:△ 3:♢)
+
+			circleArive[j][i] = false;//画面左の〇の表示(0:非表示 1:表示)
+			triangleArive[j][i] = false;//画面左の△の表示(0:非表示 1:表示)
+			squareArive[j][i] = false;//画面左の♢の表示(0:非表示 1:表示)
+
 
 			//左右のタイルにランダムでブロック配置
-			tilePattern[i][j] = (rand() % 3) + 1;
-			subTilePattern[i][j] = (rand() % 3) + 1;
+			tilePattern[j][i] = (rand() % 3) + 1;
+
 		}
 	}
 
@@ -257,32 +257,21 @@ void GameScene::Initialize() {
 
 	for (int i = 0; i < 4; i++)
 	{
-		for (int j = 0; j < 4; j++)
+		for (int j = 0; j < 8; j++)
 		{
-			if (tilePattern[i][j] == 1.0f)
+			if (tilePattern[j][i] == 1.0f)
 			{
-				circleArive[i][j] = true;
+				circleArive[j][i] = true;
 			}
-			if (tilePattern[i][j] == 2.0f)
+			if (tilePattern[j][i] == 2.0f)
 			{
-				triangleArive[i][j] = true;
+				triangleArive[j][i] = true;
 			}
-			if (tilePattern[i][j] == 3.0f)
+			if (tilePattern[j][i] == 3.0f)
 			{
-				squareArive[i][j] = true;
+				squareArive[j][i] = true;
 			}
-			if (subTilePattern[i][j] == 1.0f)
-			{
-				subCircleArive[i][j] = true;
-			}
-			if (subTilePattern[i][j] == 2.0f)
-			{
-				subTriangleArive[i][j] = true;
-			}
-			if (subTilePattern[i][j] == 3.0f)
-			{
-				subSquareArive[i][j] = true;
-			}
+
 		}
 	}
 }
@@ -324,19 +313,64 @@ void GameScene::Update() {
 	if (!input->PushMouse(LeftButton)) {
 		xFlag = false;
 		yFlag = false;
-		int count = 0;
 		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				if (tile[i][j]->GeteColor() == Sprite::Color::RED) {
-					circleArive[i][j] = false;
-					triangleArive[i][j] = false;
-					squareArive[i][j] = false;
+			for (int j = 4; j < 8; j++) {
+				if (tile[j - 4][i]->GeteColor() == Sprite::Color::RED) {
+					circleArive[j][i] = false;
+					triangleArive[j][i] = false;
+					squareArive[j][i] = false;
 					yFlag = false;
 				}
-				if (tile[i][j]->GeteColor() == Sprite::Color::BLUE) {
+				if (tile[j - 4][i]->GeteColor() == Sprite::Color::BLUE) {
+					circleArive[j][i] = false;
+					triangleArive[j][i] = false;
+					squareArive[j][i] = false;
 					yFlag = false;
 				}
-				tile[i][j]->SetColor(Sprite::Color::DEF);
+				tile[j - 4][i]->SetColor(Sprite::Color::DEF);
+			}
+		}
+
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (!circleArive[j][i] && !triangleArive[j][i] && !squareArive[j][i]) {
+					
+					if (tilePattern[j - 1][i] == 1.0f) {
+						circleArive[j][i] = true;
+						tilePattern[j][i] = 1.0f;
+						circleArive[j - 1][i] = false;
+						triangleArive[j - 1][i] = false;
+						squareArive[j - 1][i] = false;
+					}
+					if (tilePattern[j - 1][i] == 2.0f) {
+						triangleArive[j][i] = true;
+						tilePattern[j][i] = 2.0f;
+						circleArive[j - 1][i] = false;
+						triangleArive[j - 1][i] = false;
+						squareArive[j - 1][i] = false;
+					}
+					if (tilePattern[j - 1][i] == 3.0f) {
+						squareArive[j][i] = true;
+						tilePattern[j][i] = 3.0f;
+						circleArive[j - 1][i] = false;
+						triangleArive[j - 1][i] = false;
+						squareArive[j - 1][i] = false;
+					}
+
+					
+					/*if (tilePattern[j - 1][i] == 1.0f) {
+						circleArive[j - 1][i] = true;
+					}
+					if (tilePattern[j - 1][i] == 2.0f) {
+						
+						triangleArive[j - 1][i] = true;
+					}
+					if (tilePattern[j - 1][i] == 3.0f) {
+						
+						squareArive[j - 1][i] = true;
+					}*/
+					//[tilePattern[j - 2][i] = tilePattern[j - 3][i];
+				}
 			}
 		}
 	}
@@ -372,9 +406,9 @@ void GameScene::Update() {
 		}
 
 		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				
-				XMFLOAT2 tilePos = tile[i][j]->GetPosition();
+			for (int j = 4; j < 8; j++) {
+
+				XMFLOAT2 tilePos = tile[j-4][i]->GetPosition();
 
 				if (a > c && !yFlag) {
 					//x軸処理
@@ -382,7 +416,7 @@ void GameScene::Update() {
 					if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
 						if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
 							if (input->PushMouse(LeftButton)) {
-								tile[i][j]->SetColor(Sprite::Color::RED);
+								tile[j-4][i]->SetColor(Sprite::Color::RED);
 							}
 						}
 					}
@@ -394,81 +428,13 @@ void GameScene::Update() {
 					if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
 						if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
 							if (input->PushMouse(LeftButton)) {
-								tile[i][j]->SetColor(Sprite::Color::BLUE);
+								tile[j-4][i]->SetColor(Sprite::Color::BLUE);
 							}
 						}
 					}
 
 				}
 			}
-
-
-
-			//x軸の判定
-			/*if (saveCursorPos.x < cursorPos.x) {
-				if (saveCursorPos.x - cursorPos.x < saveCursorPos.y - cursorPos.y || saveCursorPos.x - cursorPos.x < (saveCursorPos.y - cursorPos.y) * -1) {
-					if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
-						if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
-							if (input->PushMouse(LeftButton)) {
-								tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
-							}
-						}
-					}
-				}
-			}
-			else if (saveCursorPos.x > cursorPos.x) {
-				if (cursorPos.x - saveCursorPos.x < cursorPos.y - saveCursorPos.y || cursorPos.x - saveCursorPos.x < (cursorPos.y - saveCursorPos.y) * -1) {
-					if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
-						if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
-							if (input->PushMouse(LeftButton)) {
-								tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
-							}
-						}
-					}
-				}
-			}*/
-
-			/*if (saveCursorPos.y < cursorPos.y) {
-				if (saveCursorPos.y - cursorPos.y < saveCursorPos.x - cursorPos.x || saveCursorPos.y - cursorPos.y < (saveCursorPos.x - cursorPos.x) * -1) {
-					if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
-						if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
-							if (input->PushMouse(LeftButton)) {
-								tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
-							}
-						}
-					}
-				}
-			}
-			else if (saveCursorPos.y > cursorPos.y) {
-				if (cursorPos.y - saveCursorPos.y < cursorPos.x - saveCursorPos.x || cursorPos.y - saveCursorPos.y < (cursorPos.x - saveCursorPos.x) * -1) {
-					if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
-						if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
-							if (input->PushMouse(LeftButton)) {
-								tile[i][j]->SetColor({ 0.0f,0.0f,1.0f,1.0f });
-							}
-						}
-					}
-				}
-			}*/
-
-			/*if (saveCursorPos.x - cursorPos.x > saveCursorPos.y - cursorPos.y || cursorPos.x - saveCursorPos.x > cursorPos.y - saveCursorPos.y) {
-				if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
-					if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
-						if (input->PushMouse(LeftButton)) {
-							tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
-						}
-					}
-				}
-			}
-			if (saveCursorPos.x - cursorPos.x < saveCursorPos.y - cursorPos.y || cursorPos.x - saveCursorPos.x < cursorPos.y - saveCursorPos.y) {
-				if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
-					if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
-						if (input->PushMouse(LeftButton)) {
-							tile[i][j]->SetColor({ 0.0f,0.0f,1.0f,1.0f });
-						}
-					}
-				}
-			}*/
 		}
 	}
 
@@ -530,39 +496,39 @@ void GameScene::Draw() {
 
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			tile[i][j]->Draw();
+			tile[j][i]->Draw();
 		}
 	}
 
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			subTile[i][j]->Draw();
+			subTile[j][i]->Draw();
 		}
 	}
 
 	//画面左のブロック(〇)
 	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			if (circleArive[i][j]) {
-				circle[i][j]->Draw();
+		for (int j = 4; j < 8; j++) {
+			if (circleArive[j][i]) {
+				circle[j][i]->Draw();
 			}
 		}
 	}
 
 	//画面左のブロック(△)
 	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			if (triangleArive[i][j]) {
-				triangle[i][j]->Draw();
+		for (int j = 4; j < 8; j++) {
+			if (triangleArive[j][i]) {
+				triangle[j][i]->Draw();
 			}
 		}
 	}
 
 	//画面左のブロック(♢)
 	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			if (squareArive[i][j]) {
-				square[i][j]->Draw();
+		for (int j = 4; j < 8; j++) {
+			if (squareArive[j][i]) {
+				square[j][i]->Draw();
 			}
 		}
 	}
@@ -570,8 +536,8 @@ void GameScene::Draw() {
 	//画面右のブロック(〇)
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			if (subCircleArive[i][j]) {
-				subCircle[i][j]->Draw();
+			if (circleArive[j][i]) {
+				circle[j][i]->Draw();
 			}
 		}
 	}
@@ -579,8 +545,8 @@ void GameScene::Draw() {
 	//画面右のブロック(△)
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			if (subTriangleArive[i][j]) {
-				subTriangle[i][j]->Draw();
+			if (triangleArive[j][i]) {
+				triangle[j][i]->Draw();
 			}
 		}
 	}
@@ -588,8 +554,8 @@ void GameScene::Draw() {
 	//画面右のブロック(♢)
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			if (subSquareArive[i][j]) {
-				subSquare[i][j]->Draw();
+			if (squareArive[j][i]) {
+				square[j][i]->Draw();
 			}
 		}
 	}
@@ -611,14 +577,14 @@ void GameScene::Draw() {
 	oneSecTime[drawTime[2]]->Draw();//12[0]
 
 	//スコア関連
-	scoreSprite->Draw();//SCOREロゴ
-	colonScore->Draw();//コロン(:)
-	hunThouScore[drawScore[0]]->Draw();//[0]00000
-	tenThouScore[drawScore[1]]->Draw();//0[0]0000
-	thouScore[drawScore[2]]->Draw();//00[0]000
-	hunScore[drawScore[3]]->Draw();//000[0]00
-	tenScore[drawScore[4]]->Draw();//0000[0]0
-	oneScore[drawScore[5]]->Draw();//00000[0]
+	//scoreSprite->Draw();//SCOREロゴ
+	//colonScore->Draw();//コロン(:)
+	//hunThouScore[drawScore[0]]->Draw();//[0]00000
+	//tenThouScore[drawScore[1]]->Draw();//0[0]0000
+	//thouScore[drawScore[2]]->Draw();//00[0]000
+	//hunScore[drawScore[3]]->Draw();//000[0]00
+	//tenScore[drawScore[4]]->Draw();//0000[0]0
+	//oneScore[drawScore[5]]->Draw();//00000[0]
 
 	cursor->Draw();
 	// デバッグテキストの描画
