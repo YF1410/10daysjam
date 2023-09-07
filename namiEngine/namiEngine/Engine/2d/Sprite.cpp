@@ -469,6 +469,26 @@ void Sprite::SetAnchorPoint(XMFLOAT2 anchorpoint) {
 	TransferVertices();
 }
 
+void Sprite::SetColor(Color color)
+{
+	if (color == DEF) {
+		eColor = DEF;
+		SetColor({ 1.0f,1.0f,1.0f,1.0f });
+	}
+	if (color == RED) {
+		eColor = RED;
+		SetColor({ 1.0f,0.0f,0.0f,1.0f });
+	}
+	if (color == GREEN) {
+		eColor = GREEN;
+		SetColor({ 0.0f,1.0f,0.0f,1.0f });
+	}
+	if (color == BLUE) {
+		eColor = BLUE;
+		SetColor({ 0.0f,0.0f,1.0f,1.0f });
+	}
+}
+
 void Sprite::SetIsFlipX(bool isFlipX) {
 	this->isFlipX = isFlipX;
 

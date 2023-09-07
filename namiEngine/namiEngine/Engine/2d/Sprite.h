@@ -30,6 +30,13 @@ public: // サブクラス
 		XMMATRIX mat; // ３Ｄ変換行列
 	};
 
+	enum Color {
+		DEF,
+		RED,
+		GREEN,
+		BLUE
+	};
+
 public: // 静的メンバ関数
 	// 静的初期化
 	static bool StaticInitialize(int window_width, int window_height);
@@ -83,8 +90,12 @@ public: // メンバ関数
 	void SetPosition(XMFLOAT2 position);
 	// サイズの設定
 	void SetSize(XMFLOAT2 size);
+
+	Color GeteColor() { return eColor; }
 	// カラーの設定
 	void SetColor(XMFLOAT4 color) { this->color = color; }
+
+	void SetColor(Color color);
 	// アンカーポイントの設定
 	void SetAnchorPoint(XMFLOAT2 anchorpoint);
 	// 左右反転の設定
@@ -117,6 +128,7 @@ protected: // メンバ変数
 	XMMATRIX matWorld{};
 	// 色
 	XMFLOAT4 color = { 1, 1, 1, 1 };
+	Color eColor = DEF;
 	// 左右反転
 	bool isFlipX = false;
 	// 上下反転

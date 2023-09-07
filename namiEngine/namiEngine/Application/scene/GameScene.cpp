@@ -229,31 +229,7 @@ void GameScene::Initialize() {
 
 	cameraObject->Update();
 	particleMan->Update();
-}
 
-void GameScene::Finalize()
-{
-}
-
-void GameScene::Update() {
-	cursor->SetPosition(input->GetMousePosition());
-
-	//制限時間関連
-	if (gameTime > 0) { gameTime--; }//制限時間を減らす
-	calculatedTime = gameTime / 60;//制限時間表示用に計算
-	drawTime[0] = (calculatedTime / 100) % 10;//[1]00
-	drawTime[1] = (calculatedTime / 10) % 10;//0[1]0
-	drawTime[2] = calculatedTime % 10;//00[1]
-
-	//スコア関連
-	drawScore[0] = (score / 100000) % 10;//[0]00000
-	drawScore[1] = (score / 10000) % 10;//0[0]0000
-	drawScore[2] = (score / 1000) % 10;//00[0]000
-	drawScore[3] = (score / 100) % 10;//000[0]00
-	drawScore[4] = (score / 10) % 10;//0000[0]0
-	drawScore[5] = score % 10;//00000[0]
-
-	//ブロック配置関連
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -284,6 +260,31 @@ void GameScene::Update() {
 			}
 		}
 	}
+}
+
+void GameScene::Finalize()
+{
+}
+
+void GameScene::Update() {
+	cursor->SetPosition(input->GetMousePosition());
+
+	//制限時間関連
+	if (gameTime > 0) { gameTime--; }//制限時間を減らす
+	calculatedTime = gameTime / 60;//制限時間表示用に計算
+	drawTime[0] = (calculatedTime / 100) % 10;//[1]00
+	drawTime[1] = (calculatedTime / 10) % 10;//0[1]0
+	drawTime[2] = calculatedTime % 10;//00[1]
+
+	//スコア関連
+	drawScore[0] = (score / 100000) % 10;//[0]00000
+	drawScore[1] = (score / 10000) % 10;//0[0]0000
+	drawScore[2] = (score / 1000) % 10;//00[0]000
+	drawScore[3] = (score / 100) % 10;//000[0]00
+	drawScore[4] = (score / 10) % 10;//0000[0]0
+	drawScore[5] = score % 10;//00000[0]
+
+	//ブロック配置関連
 
 	//マウスカーソル
 	if (input->TriggerMouse(LeftButton)) {
@@ -298,10 +299,19 @@ void GameScene::Update() {
 	if (!input->PushMouse(LeftButton)) {
 		xFlag = false;
 		yFlag = false;
+		int count = 0;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-
-				tile[i][j]->SetColor({ 1.0f,1.0f,1.0f,1.0f });
+				if (tile[i][j]->GeteColor() == Sprite::Color::RED) {
+					circleArive[i][j] = false;
+					triangleArive[i][j] = false;
+					squareArive[i][j] = false;
+					yFlag = false;
+				}
+				if (tile[i][j]->GeteColor() == Sprite::Color::BLUE) {
+					yFlag = false;
+				}
+				tile[i][j]->SetColor(Sprite::Color::DEF);
 			}
 		}
 	}
@@ -329,10 +339,10 @@ void GameScene::Update() {
 			d = yTmp;
 		}
 
-		if (a > 100.0f && !yFlag) {
+		if (a > 20.0f && !yFlag) {
 			xFlag = true;
 		}
-		if (c > 100.0f && !xFlag) {
+		if (c > 20.0f && !xFlag) {
 			yFlag = true;
 		}
 
@@ -347,7 +357,7 @@ void GameScene::Update() {
 					if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
 						if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
 							if (input->PushMouse(LeftButton)) {
-								tile[i][j]->SetColor({ 1.0f,0.0f,0.0f,1.0f });
+								tile[i][j]->SetColor(Sprite::Color::RED);
 							}
 						}
 					}
@@ -359,7 +369,7 @@ void GameScene::Update() {
 					if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
 						if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
 							if (input->PushMouse(LeftButton)) {
-								tile[i][j]->SetColor({ 0.0f,0.0f,1.0f,1.0f });
+								tile[i][j]->SetColor(Sprite::Color::BLUE);
 							}
 						}
 					}
