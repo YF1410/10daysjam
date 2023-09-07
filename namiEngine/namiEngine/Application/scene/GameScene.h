@@ -69,6 +69,15 @@ public: // メンバ関数
 	//リザルトシーン処理
 	void ResultScene();
 
+	//ブロックパターン取得処理
+	void GetBreakPattern(float block);
+
+	//スコア獲得処理
+	void GetScore();
+
+	//スコア加算処理
+	void ScoreCharge();
+
 protected: // メンバ変数
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
@@ -159,8 +168,10 @@ protected: // メンバ変数
 	int drawTime[3];//スコア表示用(0:百 1:十 2:一)
 
 	//スコア関連
+	int preScore = 0;//加算前のスコア
 	int score = 0;//スコア
 	int drawScore[6];//スコア表示用(0:十万 1:万 2:千 3:百 4:十 5:一)
+	float breakPattern[10];//消すブロックの種類
 
 	//ブロック表示関連
 	float tilePattern[8][4];//画面左のブロック配置(0:なし 1:〇 2:△ 3:♢)

@@ -199,6 +199,11 @@ void GameScene::Initialize() {
 		}
 	}
 
+	for (int i = 0; i < 10; i++)
+	{
+		breakPattern[i] = 0.0f;//消すブロックの種類
+	}
+
 	//STARTロゴ
 	startSprite = Sprite::Create(27, { 711.5f, 425.0f });
 	//FINISHロゴ
@@ -282,6 +287,8 @@ void GameScene::Finalize()
 
 void GameScene::Update() {
 	cursor->SetPosition(input->GetMousePosition());
+	GetScore();//スコア獲得処理
+	ScoreCharge();//スコア加算処理
 
 	//制限時間関連
 	if (gameTime > 0) { gameTime--; }//制限時間を減らす
@@ -316,12 +323,14 @@ void GameScene::Update() {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 4; j < 8; j++) {
 				if (tile[j - 4][i]->GeteColor() == Sprite::Color::RED) {
+					GetBreakPattern(tilePattern[j][i]);
 					circleArive[j][i] = false;
 					triangleArive[j][i] = false;
 					squareArive[j][i] = false;
 					yFlag = false;
 				}
 				if (tile[j - 4][i]->GeteColor() == Sprite::Color::BLUE) {
+					GetBreakPattern(tilePattern[j][i]);
 					circleArive[j][i] = false;
 					triangleArive[j][i] = false;
 					squareArive[j][i] = false;
@@ -610,5 +619,73 @@ void GameScene::ResultScene()
 	if (input->PushMouse(LeftButton))
 	{
 
+	}
+}
+
+void GameScene::GetBreakPattern(float block)
+{
+	//パターンを保存
+	for (int i = 0; i < 4; i++)
+	{
+		if (breakPattern[i] == 0.0f)
+		{
+			breakPattern[i] = block;
+			break;
+		}
+	}
+}
+
+void GameScene::GetScore()
+{
+	//何かしらのパターンが入っていたら処理開始
+	if (breakPattern[0] != 0.0f)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 1; j < 4; j++)
+			{
+				//4つすべて同じ模様
+				if (breakPattern[i] == j && breakPattern[i + 1] == j && breakPattern[i + 2] == j && breakPattern[i + 3] == j)
+				{
+					preScore += 2600;
+					break;
+				}
+				//3つ同じ模様
+				else if (breakPattern[i] == j && breakPattern[i + 1] == j && breakPattern[i + 2] == j)
+				{
+					preScore += 400;
+					break;
+				}
+				//2つ同じ模様
+				else if (breakPattern[i] == j && breakPattern[i + 1] == j)
+				{
+					preScore += 200;
+					break;
+				}
+			}
+		}
+		//保存したパターンを削除
+		for (int i = 0; i < 4; i++)
+		{
+			breakPattern[i] = 0.0f;
+		}
+	}
+}
+
+void GameScene::ScoreCharge()
+{
+	//加算前のスコアが1以上かつ加算後のスコアが999999未満なら実行
+	if (preScore > 0 && score < 999999)
+	{
+		if (preScore > 20)
+		{
+			preScore -= 15;//-15
+			score += 15;//+15
+		}
+		else
+		{
+			preScore -= 1;//-1
+			score += 1;//+1
+		}
 	}
 }
