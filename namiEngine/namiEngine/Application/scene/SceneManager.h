@@ -11,7 +11,11 @@ public:
 
 	void Draw();
 
+	void ToTitleScene();
+
 	void ToGameScene();
+
+	void ToResultScene();
 
 private:
 	void changeScene(SceneInterface* scene);
