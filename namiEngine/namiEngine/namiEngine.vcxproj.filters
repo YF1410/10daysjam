@@ -135,6 +135,12 @@
     <ClCompile Include="Engine\2d\AllLoadSprite.cpp">
       <Filter>Engine\2D</Filter>
     </ClCompile>
+    <ClCompile Include="Application\scene\ResultScene.cpp">
+      <Filter>Application\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\scene\TitleScene.cpp">
+      <Filter>Application\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\NamiGame.h">
@@ -268,6 +274,12 @@
     </ClInclude>
     <ClInclude Include="Engine\2d\AllLoadSprite.h">
       <Filter>Engine\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\scene\ResultScene.h">
+      <Filter>Application\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\scene\TitleScene.h">
+      <Filter>Application\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,7 @@
 #include "SceneManager.h"
 #include "GameScene.h"
+#include "TitleScene.h"
+#include "ResultScene.h"
 
 SceneManager SceneManager::instance;
 
@@ -19,9 +21,17 @@ void SceneManager::Draw()
 	scene_->Draw();
 }
 
+void SceneManager::ToTitleScene() {
+	Initialize(new TitleScene);
+}
+
 void SceneManager::ToGameScene()
 {
 	Initialize(new GameScene);
+}
+
+void SceneManager::ToResultScene() {
+	Initialize(new ResultScene);
 }
 
 void SceneManager::changeScene(SceneInterface* scene)

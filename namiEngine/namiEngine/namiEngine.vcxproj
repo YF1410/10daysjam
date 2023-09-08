@@ -101,7 +101,9 @@
     <ClCompile Include="Application\main.cpp" />
     <ClCompile Include="Application\NamiGame.cpp" />
     <ClCompile Include="Application\scene\GameScene.cpp" />
+    <ClCompile Include="Application\scene\ResultScene.cpp" />
     <ClCompile Include="Application\scene\SceneManager.cpp" />
+    <ClCompile Include="Application\scene\TitleScene.cpp" />
     <ClCompile Include="Engine\2d\AllLoadSprite.cpp" />
     <ClCompile Include="Engine\2d\DebugText.cpp" />
     <ClCompile Include="Engine\2d\PostEffect.cpp" />
@@ -135,8 +137,10 @@
   <ItemGroup>
     <ClInclude Include="Application\NamiGame.h" />
     <ClInclude Include="Application\scene\GameScene.h" />
+    <ClInclude Include="Application\scene\ResultScene.h" />
     <ClInclude Include="Application\scene\SceneInterface.h" />
     <ClInclude Include="Application\scene\SceneManager.h" />
+    <ClInclude Include="Application\scene\TitleScene.h" />
     <ClInclude Include="Engine\2d\AllLoadSprite.h" />
     <ClInclude Include="Engine\2d\DebugText.h" />
     <ClInclude Include="Engine\2d\PostEffect.h" />
