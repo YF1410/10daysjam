@@ -75,7 +75,7 @@ void GameScene::Initialize() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 4; j < 8; j++) {
 			float tileSize = 128.0f;
-			circle[j][i] = Sprite::Create(1, { 280.0f + i * tileSize, 256.0f + (j-4) * tileSize });
+			circle[j][i] = Sprite::Create(1, { 280.0f + i * tileSize, 256.0f + (j - 4) * tileSize });
 			circle[j][i]->SetSize({ tileSize,tileSize });
 		}
 	}
@@ -365,8 +365,8 @@ void GameScene::Update() {
 						squareArive[j - 1][i] = false;
 					}
 
-					if(!circleArive[0][i] && !triangleArive[0][i] && !squareArive[0][i])
-					tilePattern[0][i] = (rand() % 3) + 1;
+					if (!circleArive[0][i] && !triangleArive[0][i] && !squareArive[0][i])
+						tilePattern[0][i] = (rand() % 3) + 1;
 					if (tilePattern[0][i] == 1.0f) {
 						circleArive[0][i] = true;
 						tilePattern[0][i] = 1.0f;
@@ -418,38 +418,45 @@ void GameScene::Update() {
 		}
 
 		for (int i = 0; i < 4; i++) {
-			for (int j = 4; j < 8; j++) {
+			for (int j = 0; j < 4; j++) {
 
-				XMFLOAT2 tilePos = tile[j-4][i]->GetPosition();
+				XMFLOAT2 tilePos = tile[j][i]->GetPosition();
+				if (input->PushMouse(LeftButton)) {
+					if (a > c && !yFlag) {
+						//x軸処理
+						//xFlag = true;
 
-				if (a > c && !yFlag) {
-					//x軸処理
-					//xFlag = true;
-					if (tilePos.x < cursorPos.x && tilePos.x + tileSize > cursorPos.x) {
-						if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
-							if (input->PushMouse(LeftButton)) {
-								tile[j-4][i]->SetColor(Sprite::Color::RED);
+						if (saveCursorPos.x < cursorPos.x && saveCursorPos.x < tilePos.x + tileSize && tilePos.x < cursorPos.x) {
+							if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
+								tile[j][i]->SetColor(Sprite::Color::RED);
+							}
+						}
+						else if (saveCursorPos.x > cursorPos.x && saveCursorPos.x > tilePos.x && tilePos.x + tileSize > cursorPos.x) {
+							if (tilePos.y < saveCursorPos.y && tilePos.y + tileSize > saveCursorPos.y) {
+								tile[j][i]->SetColor(Sprite::Color::RED);
 							}
 						}
 					}
 
-				}
-				else if (a < c && !xFlag) {
-					//y軸処理
-					//yFlag = true;
-					if (tilePos.y < cursorPos.y && tilePos.y + tileSize > cursorPos.y) {
-						if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
-							if (input->PushMouse(LeftButton)) {
-								tile[j-4][i]->SetColor(Sprite::Color::BLUE);
+					else if (a < c && !xFlag) {
+						//y軸処理
+						//yFlag = true;
+
+						if (saveCursorPos.y < cursorPos.y && saveCursorPos.y < tilePos.y + tileSize && tilePos.y < cursorPos.y) {
+							if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
+								tile[j][i]->SetColor(Sprite::Color::BLUE);
+							}
+						}
+						else if (saveCursorPos.y > cursorPos.y&& saveCursorPos.y > tilePos.y && tilePos.y + tileSize > cursorPos.y) {
+							if (tilePos.x < saveCursorPos.x && tilePos.x + tileSize > saveCursorPos.x) {
+								tile[j][i]->SetColor(Sprite::Color::BLUE);
 							}
 						}
 					}
-
 				}
 			}
 		}
 	}
-
 }
 
 
