@@ -182,23 +182,32 @@ void TitleScene::Finalize() {}
 
 void TitleScene::Update()
 {
-	XMFLOAT2 startPos = startSprite->GetPosition();
-	XMFLOAT2 mousePos = input->GetMousePosition();
-
-	if (startPos.x < mousePos.x && startPos.x + 177.0f > mousePos.x && startPos.y< mousePos.y && startPos.y + 50.0f > mousePos.y) {
-		startSprite->SetColor(Sprite::Color::GREEN);
-		if (input->TriggerMouse(LeftButton)) {
-			SceneManager::GetInstance()->ToGameScene();
-		}
-	}
-	else
+	if (startFlag)
 	{
-		startSprite->SetColor(Sprite::Color::DEF);
+		XMFLOAT2 startPos = startSprite->GetPosition();
+		XMFLOAT2 mousePos = input->GetMousePosition();
+
+		if (startPos.x < mousePos.x && startPos.x + 177.0f > mousePos.x && startPos.y< mousePos.y && startPos.y + 50.0f > mousePos.y) {
+			startSprite->SetColor(Sprite::Color::GREEN);
+			if (input->TriggerMouse(LeftButton)) {
+				SceneManager::GetInstance()->ToGameScene();
+			}
+		}
+		else
+		{
+			startSprite->SetColor(Sprite::Color::DEF);
+		}
 	}
 
 	cursor->SetPosition(input->GetMousePosition());
 	GetScore();//スコア獲得処理
 	ScoreCharge();//スコア加算処理
+
+	//STARTロゴ出現
+	if (2000 <= preScore + score)
+	{
+		startFlag = true;
+	}
 
 	//スコア関連
 	drawScore[0] = (score / 100000) % 10;//[0]00000
@@ -477,7 +486,11 @@ void TitleScene::Draw()
 	}
 
 	clickDrag->Draw();//ClickDrag
-	startSprite->Draw();//STARTロゴ
+
+	if (startFlag)
+	{
+		startSprite->Draw();//STARTロゴ
+	}
 
 	cursor->Draw();
 

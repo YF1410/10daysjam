@@ -447,6 +447,15 @@ void GameScene::Update() {
 			}
 		}
 	}
+
+	//制限時間切れたらリザルトシーン
+	if (gameTime == 0.0f)
+	{
+		//加算中のスコアをすべて足す
+		score = score + preScore;
+		preScore = 0.0f;
+		SceneManager::GetInstance()->ToResultScene();
+	}
 }
 
 

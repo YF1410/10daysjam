@@ -117,4 +117,6 @@ protected: // メンバ変数
 	bool squareArive[8][4];//画面左の♢の表示(0:非表示 1:表示)
 	float pointPattern = 0.0f;//Pointボードの見た目(0:〇 1:△ 2:♢)
 	float pointChange = 0.0f;//pointボード見た目切り替え用
+
+	bool startFlag = false;//STRATロゴの出現判定
 };

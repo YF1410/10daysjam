@@ -111,6 +111,19 @@ void ResultScene::Finalize() {}
 
 void ResultScene::Update()
 {
+	//ƒ‰ƒ“ƒN•\Ž¦
+	if (80000 <= score)
+	{
+		rankPattern = 0.0f;
+	}
+	else if (40000 <= score && score < 80000)
+	{
+		rankPattern = 1.0f;
+	}
+	else
+	{
+		rankPattern = 2.0f;
+	}
 
 	XMFLOAT2 retryPos = retrySprite->GetPosition();
 	XMFLOAT2 titlePos = titleSprite->GetPosition();
