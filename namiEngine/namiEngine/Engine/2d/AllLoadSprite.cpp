@@ -152,10 +152,34 @@ void AllLoadSprite::AllLoadTexture()
 		assert(0);
 		return;
 	}
-
-	/*if (!Sprite::LoadTexture(46, L"Resources/gameover.png")) {
+	if (!Sprite::LoadTexture(31, L"Resources/sprite/backgroundsub.png"))
+	{
 		assert(0);
 		return;
-	}*/
-
+	}
+	if (!Sprite::LoadTexture(32, L"Resources/sprite/clickdrag.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(33, L"Resources/sprite/pointc.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(34, L"Resources/sprite/pointt.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(35, L"Resources/sprite/points.png"))
+	{
+		assert(0);
+		return;
+	}
+	if (!Sprite::LoadTexture(36, L"Resources/sprite/titlebackground.png"))
+	{
+		assert(0);
+		return;
+	}
 }
