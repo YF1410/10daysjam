@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "TitleScene.h"
 #include "ResultScene.h"
+#include "StageManager.h"
 
 SceneManager SceneManager::instance;
 
@@ -30,7 +31,8 @@ void SceneManager::ToGameScene()
 	Initialize(new GameScene);
 }
 
-void SceneManager::ToResultScene() {
+void SceneManager::ToResultScene(int score) {
+	StageManager::GetInstance()->SetScore(score);
 	Initialize(new ResultScene);
 }
 

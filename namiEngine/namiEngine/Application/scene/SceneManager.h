@@ -15,7 +15,7 @@ public:
 
 	void ToGameScene();
 
-	void ToResultScene();
+	void ToResultScene(int score);
 
 private:
 	void changeScene(SceneInterface* scene);

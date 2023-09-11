@@ -1,6 +1,7 @@
 #include "ResultScene.h"
 #include "FbxLoader.h"
 #include "Vector3.h"
+#include "StageManager.h"
 
 #include <cassert>
 #include <sstream>
@@ -58,6 +59,8 @@ void ResultScene::Initialize()
 	}
 
 	//ÉäÉUÉãÉgâÊñ ä÷òA
+	//score
+	score = StageManager::GetInstance()->GetScore();
 	//RESULTÉçÉS
 	resultSprite = Sprite::Create(21, { 700.0f, 143.0f });
 	//RANKÉçÉS

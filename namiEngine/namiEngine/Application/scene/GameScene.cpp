@@ -272,9 +272,9 @@ void GameScene::Finalize()
 
 void GameScene::Update() {
 
-	if (input->TriggerMouse(RightButton)) {
-		SceneManager::GetInstance()->ToResultScene();
-	}
+	/*if (input->TriggerMouse(RightButton)) {
+		SceneManager::GetInstance()->ToResultScene(30000);
+	}*/
 
 	cursor->SetPosition(input->GetMousePosition());
 	GetScore();//スコア獲得処理
@@ -454,7 +454,7 @@ void GameScene::Update() {
 		//加算中のスコアをすべて足す
 		score = score + preScore;
 		preScore = 0.0f;
-		SceneManager::GetInstance()->ToResultScene();
+		SceneManager::GetInstance()->ToResultScene(score);
 	}
 }
 

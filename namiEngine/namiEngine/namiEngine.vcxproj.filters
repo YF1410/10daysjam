@@ -141,6 +141,9 @@
     <ClCompile Include="Application\scene\TitleScene.cpp">
       <Filter>Application\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Application\StageManager.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\NamiGame.h">
@@ -280,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="Application\scene\TitleScene.h">
       <Filter>Application\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\StageManager.h">
+      <Filter>Application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
