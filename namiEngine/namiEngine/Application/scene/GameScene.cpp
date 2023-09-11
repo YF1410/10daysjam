@@ -9,8 +9,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-
 using namespace DirectX;
 
 GameScene::GameScene() {
@@ -24,6 +22,7 @@ void GameScene::Initialize() {
 	dxCommon = DirectXCommon::GetInstance();
 	input = Input::GetInstance();
 	audio = Audio::GetInstance();
+	scene_ = SceneManager::GetInstance();
 
 	// カメラ生成
 	cameraObject = std::make_unique<Camera>(WinApp::window_width, WinApp::window_height);
@@ -42,15 +41,7 @@ void GameScene::Initialize() {
 	// テクスチャ読み込み
 
 	//スプライト生成
-	//fadeSprite = Sprite::Create(2, { 0.0f,0.0f }, fadeColor);
-
 	backGround = Sprite::Create(30, { 0.0f,0.0f });
-
-	//ブロックの模様
-	for (int i = 0; i < 3; i++)
-	{
-		blockSprite[i] = Sprite::Create(i + 1, { i * 64.0f,0.0f });
-	}
 
 	cursor = Sprite::Create(4, { 0.0f,0.0f });
 
@@ -123,12 +114,6 @@ void GameScene::Initialize() {
 			square[j][i] = Sprite::Create(3, { 1181.0f + i * subTileSize, 350.0f + j * subTileSize });
 			square[j][i]->SetSize({ subTileSize,subTileSize });
 		}
-	}
-
-	//数字0～9
-	for (int i = 0; i < 10; i++)
-	{
-		number[i] = Sprite::Create(i + 10, { (i * 35.0f) + 1200.0f, 100.0f });
 	}
 
 	//SCOREロゴ
@@ -505,14 +490,6 @@ void GameScene::Draw() {
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
 
-	//fadeSprite->Draw();
-
-	//ブロックの模様
-	for (int i = 0; i < 3; i++)
-	{
-		//blockSprite[i]->Draw();
-	}
-
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			tile[j][i]->Draw();
@@ -579,12 +556,6 @@ void GameScene::Draw() {
 		}
 	}
 
-	//数字0～9
-	for (int i = 0; i < 10; i++)
-	{
-		//number[i]->Draw();
-	}
-
 	//NEXTロゴ
 	nextSprite->Draw();
 
@@ -614,24 +585,6 @@ void GameScene::Draw() {
 #pragma endregion
 }
 
-void GameScene::TitleScene()
-{
-	//左クリックでゲーム画面に遷移
-	if (input->PushMouse(LeftButton))
-	{
-
-	}
-}
-
-void GameScene::ResultScene()
-{
-	//左クリックで選択したシーンに遷移
-	if (input->PushMouse(LeftButton))
-	{
-
-	}
-}
-
 void GameScene::GetBreakPattern(float block)
 {
 	//パターンを保存
@@ -657,7 +610,7 @@ void GameScene::GetScore()
 				//4つすべて同じ模様
 				if (breakPattern[i] == j && breakPattern[i + 1] == j && breakPattern[i + 2] == j && breakPattern[i + 3] == j)
 				{
-					preScore += 2600;
+					preScore += 1000;
 					break;
 				}
 				//3つ同じ模様

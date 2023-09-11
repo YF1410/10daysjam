@@ -63,12 +63,6 @@ public: // メンバ関数
 	/// </summary>
 	void Draw() override;
 
-	//タイトルシーン処理
-	void TitleScene();
-
-	//リザルトシーン処理
-	void ResultScene();
-
 	//ブロックパターン取得処理
 	void GetBreakPattern(float block);
 
@@ -83,10 +77,8 @@ protected: // メンバ変数
 	Input* input = nullptr;
 	Audio* audio = nullptr;
 	DebugText* debugText = nullptr;
+	SceneManager* scene_;
 
-	std::unique_ptr<Sprite> fadeSprite;
-
-	std::unique_ptr<Sprite> blockSprite[3];//ブロックの種類(0:〇、1:△、2:♢)
 	std::unique_ptr<Sprite> cursor;
 	XMFLOAT2 saveCursorPos = { 0.0f,0.0f };
 	std::unique_ptr<Sprite> tile[4][4];
@@ -94,7 +86,6 @@ protected: // メンバ変数
 	bool xFlag = false;
 	bool yFlag = false;
 	std::unique_ptr<Sprite> subTile[4][4];
-	std::unique_ptr<Sprite> number[10];//数字0～9
 	std::unique_ptr<Sprite> colon;//コロン(:)
 	std::unique_ptr<Sprite> nextSprite;//NEXTロゴ
 	std::unique_ptr<Sprite> backGround;//ゲーム背景
