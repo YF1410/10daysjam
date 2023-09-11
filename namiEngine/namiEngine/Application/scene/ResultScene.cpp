@@ -111,6 +111,33 @@ void ResultScene::Finalize() {}
 
 void ResultScene::Update()
 {
+
+	XMFLOAT2 retryPos = retrySprite->GetPosition();
+	XMFLOAT2 titlePos = titleSprite->GetPosition();
+	XMFLOAT2 mousePos = input->GetMousePosition();
+
+	if (retryPos.x < mousePos.x && retryPos.x + 170.0f > mousePos.x && retryPos.y< mousePos.y && retryPos.y + 50.0f > mousePos.y) {
+		retrySprite->SetColor(Sprite::Color::GREEN);
+		if (input->TriggerMouse(LeftButton)) {
+			SceneManager::GetInstance()->ToGameScene();
+		}
+	}
+	else
+	{
+		retrySprite->SetColor(Sprite::Color::DEF);
+	}
+
+	if (titlePos.x < mousePos.x && titlePos.x + 161.0f > mousePos.x && titlePos.y< mousePos.y && titlePos.y + 50.0f > mousePos.y) {
+		titleSprite->SetColor(Sprite::Color::GREEN);
+		if (input->TriggerMouse(LeftButton)) {
+			SceneManager::GetInstance()->ToTitleScene();
+		}
+	}
+	else
+	{
+		titleSprite->SetColor(Sprite::Color::DEF);
+	}
+
 	cursor->SetPosition(input->GetMousePosition());
 	if (input->PushMouse(LeftButton)) {
 		cursor->SetColor({ 1.0f,1.0f,0.0f,1.0f });

@@ -182,6 +182,20 @@ void TitleScene::Finalize() {}
 
 void TitleScene::Update()
 {
+	XMFLOAT2 startPos = startSprite->GetPosition();
+	XMFLOAT2 mousePos = input->GetMousePosition();
+
+	if (startPos.x < mousePos.x && startPos.x + 177.0f > mousePos.x && startPos.y< mousePos.y && startPos.y + 50.0f > mousePos.y) {
+		startSprite->SetColor(Sprite::Color::GREEN);
+		if (input->TriggerMouse(LeftButton)) {
+			SceneManager::GetInstance()->ToGameScene();
+		}
+	}
+	else
+	{
+		startSprite->SetColor(Sprite::Color::DEF);
+	}
+
 	cursor->SetPosition(input->GetMousePosition());
 	GetScore();//スコア獲得処理
 	ScoreCharge();//スコア加算処理

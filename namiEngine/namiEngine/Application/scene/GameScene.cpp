@@ -271,6 +271,11 @@ void GameScene::Finalize()
 }
 
 void GameScene::Update() {
+
+	if (input->TriggerMouse(RightButton)) {
+		SceneManager::GetInstance()->ToResultScene();
+	}
+
 	cursor->SetPosition(input->GetMousePosition());
 	GetScore();//スコア獲得処理
 	ScoreCharge();//スコア加算処理
