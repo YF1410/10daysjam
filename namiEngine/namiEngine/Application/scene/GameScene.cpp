@@ -41,6 +41,7 @@ void GameScene::Initialize() {
 	// テクスチャ読み込み
 
 	//スプライト生成
+	fadeSprite = Sprite::Create(40, { 0.0f,0.0f });
 	backGround = Sprite::Create(30, { 0.0f,0.0f });
 
 	cursor = Sprite::Create(4, { 0.0f,0.0f });
@@ -272,8 +273,17 @@ void GameScene::Finalize()
 
 void GameScene::Update() {
 
+	if (isFadeIn) {
+		fadeColor.w -= 0.05f;
+		fadeSprite->SetColor(fadeColor);
+		if (fadeColor.w <= 0.0f) {
+			fadeColor.w = 0.0f;
+			isFadeIn = false;
+		}
+	}
+
 	/*if (input->TriggerMouse(RightButton)) {
-		SceneManager::GetInstance()->ToResultScene(30000);
+		isFadeOut = true;
 	}*/
 
 	cursor->SetPosition(input->GetMousePosition());
@@ -454,7 +464,16 @@ void GameScene::Update() {
 		//加算中のスコアをすべて足す
 		score = score + preScore;
 		preScore = 0.0f;
-		SceneManager::GetInstance()->ToResultScene(score);
+		isFadeOut = true;
+	}
+
+	if (isFadeOut) {
+		fadeColor.w += 0.04f;
+		fadeSprite->SetColor(fadeColor);
+		if (fadeColor.w >= 1.0f) {
+			isFadeOut = false;
+			SceneManager::GetInstance()->ToResultScene(score);
+		}
 	}
 }
 
@@ -591,6 +610,8 @@ void GameScene::Draw() {
 	oneScore[drawScore[5]]->Draw();//00000[0]
 
 	cursor->Draw();
+
+	fadeSprite->Draw();
 	// デバッグテキストの描画
 	debugText->DrawAll();
 

@@ -79,6 +79,7 @@ protected: // メンバ変数
 	DebugText* debugText = nullptr;
 	SceneManager* scene_;
 
+	std::unique_ptr<Sprite> fadeSprite;
 	std::unique_ptr<Sprite> cursor;
 	XMFLOAT2 saveCursorPos = { 0.0f,0.0f };
 	std::unique_ptr<Sprite> tile[4][4];

@@ -25,6 +25,7 @@ void TitleScene::Initialize()
 	// テクスチャ読み込み
 
 	//スプライト生成
+	fadeSprite = Sprite::Create(40, { 0.0f,0.0f });
 	backGround = Sprite::Create(36, { 0.0f,0.0f });
 
 	cursor = Sprite::Create(4, { 0.0f,0.0f });
@@ -182,6 +183,15 @@ void TitleScene::Finalize() {}
 
 void TitleScene::Update()
 {
+	if (isFadeIn) {
+		fadeColor.w -= 0.05f;
+		fadeSprite->SetColor(fadeColor);
+		if (fadeColor.w <= 0.0f) {
+			fadeColor.w = 0.0f;
+			isFadeIn = false;
+		}
+	}
+
 	if (startFlag)
 	{
 		XMFLOAT2 startPos = startSprite->GetPosition();
@@ -190,7 +200,7 @@ void TitleScene::Update()
 		if (startPos.x < mousePos.x && startPos.x + 177.0f > mousePos.x && startPos.y< mousePos.y && startPos.y + 50.0f > mousePos.y) {
 			startSprite->SetColor(Sprite::Color::GREEN);
 			if (input->TriggerMouse(LeftButton)) {
-				SceneManager::GetInstance()->ToGameScene();
+				isFadeOut = true;
 			}
 		}
 		else
@@ -382,6 +392,14 @@ void TitleScene::Update()
 			}
 		}
 	}
+	if (isFadeOut) {
+		fadeColor.w += 0.04f;
+		fadeSprite->SetColor(fadeColor);
+		if (fadeColor.w >= 1.0f) {
+			isFadeOut = false;
+			SceneManager::GetInstance()->ToGameScene()	;
+		}
+	}
 }
 
 void TitleScene::Draw()
@@ -493,7 +511,7 @@ void TitleScene::Draw()
 	}
 
 	cursor->Draw();
-
+	fadeSprite->Draw();
 	// スプライト描画後処理
 	Sprite::PostDraw();
 #pragma endregion

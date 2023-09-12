@@ -42,6 +42,8 @@ protected: // メンバ変数
 
 	SceneManager* scene_;
 
+
+	std::unique_ptr<Sprite> fadeSprite;
 	std::unique_ptr<Sprite> cursor;
 	XMFLOAT2 saveCursorPos = { 0.0f,0.0f };
 	std::unique_ptr<Sprite> backGround;//ゲーム背景
@@ -70,6 +72,8 @@ protected: // メンバ変数
 	bool isFadeIn = true;
 	bool isGameOver = false;
 	bool isGameClear = false;
+	bool isTitle = false;
+	bool isRetry = false;
 
 	/// <summary>
 	/// ゲームシーン用

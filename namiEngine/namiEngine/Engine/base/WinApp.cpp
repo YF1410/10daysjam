@@ -1,6 +1,6 @@
 #include "WinApp.h"
 
-const wchar_t WinApp::windowClassName[] = L"レッツアクション！";
+const wchar_t WinApp::windowClassName[] = L"dishapes";
 
 LRESULT WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 

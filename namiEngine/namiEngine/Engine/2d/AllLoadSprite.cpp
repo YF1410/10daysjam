@@ -182,4 +182,8 @@ void AllLoadSprite::AllLoadTexture()
 		assert(0);
 		return;
 	}
+	if (!Sprite::LoadTexture(40, L"Resources/sprite/fadeSprite.png")) {
+		assert(0);
+		return;
+	}
 }

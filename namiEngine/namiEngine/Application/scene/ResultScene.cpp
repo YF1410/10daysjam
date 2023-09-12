@@ -26,6 +26,7 @@ void ResultScene::Initialize()
 	// テクスチャ読み込み
 
 	//スプライト生成
+	fadeSprite = Sprite::Create(40, { 0.0f,0.0f });
 	backGround = Sprite::Create(31, { 0.0f,0.0f });
 
 	cursor = Sprite::Create(4, { 0.0f,0.0f });
@@ -114,6 +115,15 @@ void ResultScene::Finalize() {}
 
 void ResultScene::Update()
 {
+	if (isFadeIn) {
+		fadeColor.w -= 0.05f;
+		fadeSprite->SetColor(fadeColor);
+		if (fadeColor.w <= 0.0f) {
+			fadeColor.w = 0.0f;
+			isFadeIn = false;
+		}
+	}
+
 	//ランク表示
 	if (80000 <= score)
 	{
@@ -135,7 +145,8 @@ void ResultScene::Update()
 	if (retryPos.x < mousePos.x && retryPos.x + 170.0f > mousePos.x && retryPos.y< mousePos.y && retryPos.y + 50.0f > mousePos.y) {
 		retrySprite->SetColor(Sprite::Color::GREEN);
 		if (input->TriggerMouse(LeftButton)) {
-			SceneManager::GetInstance()->ToGameScene();
+			isRetry = true;
+			isFadeOut = true;
 		}
 	}
 	else
@@ -146,7 +157,8 @@ void ResultScene::Update()
 	if (titlePos.x < mousePos.x && titlePos.x + 161.0f > mousePos.x && titlePos.y< mousePos.y && titlePos.y + 50.0f > mousePos.y) {
 		titleSprite->SetColor(Sprite::Color::GREEN);
 		if (input->TriggerMouse(LeftButton)) {
-			SceneManager::GetInstance()->ToTitleScene();
+			isTitle = true;
+			isFadeOut = true;
 		}
 	}
 	else
@@ -168,6 +180,21 @@ void ResultScene::Update()
 	drawScore[3] = (score / 100) % 10;//000[0]00
 	drawScore[4] = (score / 10) % 10;//0000[0]0
 	drawScore[5] = score % 10;//00000[0]
+
+
+	if (isFadeOut) {
+		fadeColor.w += 0.04f;
+		fadeSprite->SetColor(fadeColor);
+		if (fadeColor.w >= 1.0f) {
+			isFadeOut = false;
+			if (isRetry) {
+				SceneManager::GetInstance()->ToGameScene();
+			}
+			else if (isTitle) {
+				SceneManager::GetInstance()->ToTitleScene();
+			}
+		}
+	}
 }
 
 void ResultScene::Draw()
@@ -244,6 +271,7 @@ void ResultScene::Draw()
 	resultSprite->Draw();//RESULTロゴ
 
 	cursor->Draw();
+	fadeSprite->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
